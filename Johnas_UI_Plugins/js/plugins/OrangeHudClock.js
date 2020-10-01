@@ -70,6 +70,11 @@
 
 var Imported = Imported || {};
 
+/**
+ * Trying to get the timer object from the BMM_TimingBelt.js file
+ */
+
+
 if (Imported["OrangeHud"] === undefined) {
   throw new Error("Please add OrangeHud before OrangeHudClock!");
 }
