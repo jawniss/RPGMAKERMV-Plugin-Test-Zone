@@ -16,13 +16,13 @@
  /**
   * TO DO LIST:
 
-	gonna have to make it so that there's a global variable for number of heart containers
+	- gonna have to make it so that there's a global variable for number of heart containers
 	otherwise every time picks up hp, can go past the max
 
-	For further polish, if can't find way to animate could do janky animation
+	- For further polish, if can't find way to animate could do janky animation
 	by using .showPicture and using broken heart pngs
 
-	Currently hard coded for in game variable 1: Need to modularize it so that
+	- Currently hard coded for in game variable 1: Need to modularize it so that
 	it takes in the parameter and uses that variable
   */
 ( function() 
@@ -33,6 +33,7 @@
 	Scene_Map.prototype.update = function( numHearts ) 
 	{
 		numHearts = 1;
+
 		_alias_scene_map_update.call( this );
 		if( $gameVariables.value( numHearts ) == 3 )
 		{
