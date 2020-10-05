@@ -108,37 +108,32 @@
       var y = eval(args.shift());
       var z = eval(args.shift());
 
-        // _alias_scene_map_draw_melee_tiles = Scene_Map.prototype.update;
-        // Scene_Map.prototype.update = function() 
-        // {
-          // _alias_scene_map_draw_melee_tiles.call( this );
-          console.log( "Showing melee attack" );
+      console.log( "Showing melee attack" );
 
-          console.log( "Tile ", x, " ", y, " ", z, " is centre of attack" );
-          var oldTileLeft = $gameMap.tileId( x - 1, y, z );
-          var oldTileRight = $gameMap.tileId( x + 1, y, z );
-          var oldTileUp = $gameMap.tileId( x, y - 1, z );
-          var oldTileDown = $gameMap.tileId( x, y + 1, z );
-          
-          var xString = x.toString();
-          var xLeftString = ( x - 1 ).toString();
-          var xRightString = ( x + 1 ).toString();
+      console.log( "Tile ", x, " ", y, " ", z, " is centre of attack" );
+      var oldTileLeft = $gameMap.tileId( x - 1, y, z );
+      var oldTileRight = $gameMap.tileId( x + 1, y, z );
+      var oldTileUp = $gameMap.tileId( x, y - 1, z );
+      var oldTileDown = $gameMap.tileId( x, y + 1, z );
+      
+      var xString = x.toString();
+      var xLeftString = ( x - 1 ).toString();
+      var xRightString = ( x + 1 ).toString();
 
-          var yString = y.toString();
-          var yUpString = ( y - 1 ).toString();
-          var yDownString = ( y + 1 ).toString();
+      var yString = y.toString();
+      var yUpString = ( y - 1 ).toString();
+      var yDownString = ( y + 1 ).toString();
 
-          var zString = z.toString();
+      var zString = z.toString();
 
-          var myInterpreter = new Game_Interpreter();
+      var myInterpreter = new Game_Interpreter();
 
-          myInterpreter.pluginCommand('ChangeTile', [ xLeftString, yString, zString, '4' ] );
-          myInterpreter.pluginCommand('ChangeTile', [ xRightString, yString, zString, '4' ] );
-          myInterpreter.pluginCommand('ChangeTile', [ xString, yUpString, zString, '4' ] );
-          myInterpreter.pluginCommand('ChangeTile', [ xString, yDownString, zString, '4' ] );
+      myInterpreter.pluginCommand('ChangeTile', [ xLeftString, yString, zString, '4' ] );
+      myInterpreter.pluginCommand('ChangeTile', [ xRightString, yString, zString, '4' ] );
+      myInterpreter.pluginCommand('ChangeTile', [ xString, yUpString, zString, '4' ] );
+      myInterpreter.pluginCommand('ChangeTile', [ xString, yDownString, zString, '4' ] );
 
-          console.log( "Done showing melee attack" );
-        // }
+      console.log( "Done showing melee attack" );
     }
 
     
