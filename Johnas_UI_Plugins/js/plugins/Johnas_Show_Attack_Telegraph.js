@@ -16,6 +16,9 @@
  /**
   * TO DO LIST:
 
+    - Figure out how to do the dredrawing, if another method? Issue with that is that
+      how does the new method know the old tileId's?
+
     - Make different cases for the different enemy attacks
 
     - Find/think out how the other files will access the functions in here
@@ -52,7 +55,7 @@
 {  
 	var parameters = PluginManager.parameters('Show_Attack_Telegraph');
        
-
+/////////////////////////////////////////////////////////////////////////////////
     // 74 is key "J"
     Input.keyMapper[ "74" ] = "Attack Happening";
     // Have to watch out - _alias .. is used in hearts_working so have to
@@ -77,7 +80,7 @@
             /**
              * Working function that works as "Plugin command"
              */
-            var myInterpreter = new Game_Interpreter()
+            var myInterpreter = new Game_Interpreter();
             myInterpreter.pluginCommand('ChangeTile', ['3', '2', '0', '4']);
             /**
              * ChangeTile 4 3 0 1
@@ -90,11 +93,59 @@
             console.log( "Done the 'Pressed J' comand" );
         }
     };
+/////////////////////////////////////////////////////////////////////////////////
 
 
 
 
-    // 74 is key "K"
+
+    /**
+     * Need to put in perimetre checking for if attack would go off map
+     */
+    showMeleeAttack = function( args )
+    {
+      var x = eval(args.shift());
+      var y = eval(args.shift());
+      var z = eval(args.shift());
+
+        // _alias_scene_map_draw_melee_tiles = Scene_Map.prototype.update;
+        // Scene_Map.prototype.update = function() 
+        // {
+          // _alias_scene_map_draw_melee_tiles.call( this );
+          console.log( "Showing melee attack" );
+
+          console.log( "Tile ", x, " ", y, " ", z, " is centre of attack" );
+          var oldTileLeft = $gameMap.tileId( x - 1, y, z );
+          var oldTileRight = $gameMap.tileId( x + 1, y, z );
+          var oldTileUp = $gameMap.tileId( x, y - 1, z );
+          var oldTileDown = $gameMap.tileId( x, y + 1, z );
+          
+          var xString = x.toString();
+          var xLeftString = ( x - 1 ).toString();
+          var xRightString = ( x + 1 ).toString();
+
+          var yString = y.toString();
+          var yUpString = ( y - 1 ).toString();
+          var yDownString = ( y + 1 ).toString();
+
+          var zString = z.toString();
+
+          var myInterpreter = new Game_Interpreter();
+
+          myInterpreter.pluginCommand('ChangeTile', [ xLeftString, yString, zString, '4' ] );
+          myInterpreter.pluginCommand('ChangeTile', [ xRightString, yString, zString, '4' ] );
+          myInterpreter.pluginCommand('ChangeTile', [ xString, yUpString, zString, '4' ] );
+          myInterpreter.pluginCommand('ChangeTile', [ xString, yDownString, zString, '4' ] );
+
+          console.log( "Done showing melee attack" );
+        // }
+    }
+
+    
+
+
+
+    // 75 is key "K"
     Input.keyMapper[ "75" ] = "Attack Finished Redraw OG";
     // Have to watch out - _alias .. is used in hearts_working so have to
     // have different names
@@ -108,7 +159,7 @@
             /**
              * Working function that works as "Plugin command"
              */
-            var myInterpreter = new Game_Interpreter()
+            var myInterpreter = new Game_Interpreter();
             myInterpreter.pluginCommand('ChangeTile', ['3', '2', '0', '2816']);
             /**
              * ChangeTile 4 3 0 1
@@ -124,15 +175,19 @@
 
 
 
+    /**
+     * Taking care of the "plugin command" command
+     */
     var _Johnas_Game_Interpreter_pluginCommand = Game_Interpreter.prototype.pluginCommand;
     // Game_Interpreter.prototype.pluginCommand = function( command, args ) 
-    Game_Interpreter.prototype.pluginCommand = function( command ) 
+    Game_Interpreter.prototype.pluginCommand = function( command, args ) 
     {
         switch( command.toUpperCase() ) 
         {
             case 'MELEE':
                 // $gameMap.copyTiles();
                 console.log( "MELEE CASE" );
+                showMeleeAttack( args );
                 break;
             // case 'CHANGETILE':
             //     $gameMap.changeTile(args);
@@ -140,7 +195,7 @@
             default:
                 // _Johnas_Game_Interpreter_pluginCommand.call(this, command, args);
                 console.log( "No case detected" );
-                _Johnas_Game_Interpreter_pluginCommand.call( this, command );
+                // _Johnas_Game_Interpreter_pluginCommand.call( this, command, args );
         }
     };
 

@@ -18,7 +18,7 @@
              * Working function that works as "Plugin command"
              */
             var meleeInterpreter = new Game_Interpreter()
-            meleeInterpreter.pluginCommand('MELEE');
+            meleeInterpreter.pluginCommand( 'MELEE', [ '5', '5', '0' ] );
 
             console.log( "Done the 'Pressed L' comand" );
         }
