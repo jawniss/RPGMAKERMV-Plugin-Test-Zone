@@ -57,38 +57,17 @@
        
 /////////////////////////////////////////////////////////////////////////////////
     // 74 is key "J"
-    Input.keyMapper[ "74" ] = "Attack Happening";
+    Input.keyMapper[ "74" ] = "TileID Checker ( 0, 0, 0 )";
     // Have to watch out - _alias .. is used in hearts_working so have to
     // have different names
     _alias_scene_map_draw_attack_tiles = Scene_Map.prototype.update;
     Scene_Map.prototype.update = function() {
       _alias_scene_map_draw_attack_tiles.call( this );
-        if( Input.isTriggered( "Attack Happening" ) )
+        if( Input.isTriggered( "TileID Checker ( 0, 0, 0 )" ) )
         {
             console.log( "The J button has been pressed" );
-
-            /**
-             * In rpg_objects.js there's the tileID function
-             */
             console.log( "Tile ID at 0, 0, 0" );
             console.log( $gameMap.tileId( 0, 0, 0 ) );
-            // $game_map.data[11,5,0] = 2816;
-
-            console.log( "Tile ID at 1, 1, 0" );
-            console.log( $gameMap.tileId( 1, 1, 0 ) );
-
-            /**
-             * Working function that works as "Plugin command"
-             */
-            var myInterpreter = new Game_Interpreter();
-            myInterpreter.pluginCommand('ChangeTile', ['3', '2', '0', '4']);
-            /**
-             * ChangeTile 4 3 0 1
-             * Changetile( x, y, z, tileID );
-             */
-
-            console.log( "Tile ID at 3, 2, 0" );
-            console.log( $gameMap.tileId( 3, 2, 0 ) );
 
             console.log( "Done the 'Pressed J' comand" );
         }
@@ -101,6 +80,15 @@
 
     /**
      * Need to put in perimetre checking for if attack would go off map
+     * 
+     * For the redraw, hacky bad way is to do globals under the interpreter
+     * part --> i could extract out a function that's just getting the stuff
+     * like a function object property
+     * https://stackoverflow.com/questions/407048/accessing-variables-from-other-functions-without-using-global-variables
+     * top answer second point
+     * 
+     * but with that there's the issue of 2 being drawn at the same time and the global object
+     * being rewritten
      */
     showMeleeAttack = function( args )
     {
@@ -128,15 +116,18 @@
 
       var myInterpreter = new Game_Interpreter();
 
-      myInterpreter.pluginCommand('ChangeTile', [ xLeftString, yString, zString, '4' ] );
-      myInterpreter.pluginCommand('ChangeTile', [ xRightString, yString, zString, '4' ] );
-      myInterpreter.pluginCommand('ChangeTile', [ xString, yUpString, zString, '4' ] );
-      myInterpreter.pluginCommand('ChangeTile', [ xString, yDownString, zString, '4' ] );
+      myInterpreter.pluginCommand('ChangeTile', [ xLeftString, yString, zString, '2386' ] );
+      myInterpreter.pluginCommand('ChangeTile', [ xRightString, yString, zString, '2386' ] );
+      myInterpreter.pluginCommand('ChangeTile', [ xString, yUpString, zString, '2386' ] );
+      myInterpreter.pluginCommand('ChangeTile', [ xString, yDownString, zString, '2386' ] );
 
       console.log( "Done showing melee attack" );
     }
 
-    
+    removeMeleeAttack = function() 
+    {
+
+    }
 
 
 
