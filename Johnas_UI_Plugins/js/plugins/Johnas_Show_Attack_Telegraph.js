@@ -123,4 +123,25 @@
     };
 
 
+
+    var _Johnas_Game_Interpreter_pluginCommand = Game_Interpreter.prototype.pluginCommand;
+    // Game_Interpreter.prototype.pluginCommand = function( command, args ) 
+    Game_Interpreter.prototype.pluginCommand = function( command ) 
+    {
+        switch( command.toUpperCase() ) 
+        {
+            case 'MELEE':
+                // $gameMap.copyTiles();
+                console.log( "MELEE CASE" );
+                break;
+            // case 'CHANGETILE':
+            //     $gameMap.changeTile(args);
+            //     break;
+            default:
+                // _Johnas_Game_Interpreter_pluginCommand.call(this, command, args);
+                console.log( "No case detected" );
+                _Johnas_Game_Interpreter_pluginCommand.call( this, command );
+        }
+    };
+
 })();  // dont touch this.

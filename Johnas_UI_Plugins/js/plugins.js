@@ -11,5 +11,6 @@ var $plugins =
 {"name":"OrangeHudLine","status":false,"description":"OrangeHudLine 1.5 - Adds a new Variable to Orange Hud","parameters":{"GroupName":"main","Pattern":"%1","VariableId":"1","SwitchId":"0","X":"","Y":"","FontFace":"","FontSize":"","FontColor":"","FontItalic":"","ScriptPattern":"","VariableX":"0","VariableY":"0"}},
 {"name":"OrangeHudClock","status":true,"description":"Adds a new Variable to Orange Hud","parameters":{"GroupName":"main","Pattern":"%1:%2:%3","VariableHour":"0","VariableMinute":"0","VariableSecond":"0","SwitchId":"0","X":"","Y":"","FontFace":"","FontSize":"","FontColor":"","FontItalic":"","ScriptPattern":""}},
 {"name":"Johnas_Show_Attack_Telegraph","status":true,"description":"Shows the affected areas of an enemy's attacks","parameters":{"":""}},
-{"name":"Shaz_TileChanger","status":true,"description":"Change tiles on map or copy tiles from another map","parameters":{}}
+{"name":"Shaz_TileChanger","status":true,"description":"Change tiles on map or copy tiles from another map","parameters":{}},
+{"name":"testCallingFunction","status":true,"description":"","parameters":{}}
 ];
