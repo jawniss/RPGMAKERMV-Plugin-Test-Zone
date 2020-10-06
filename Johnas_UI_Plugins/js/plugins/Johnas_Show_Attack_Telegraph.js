@@ -89,6 +89,32 @@
      * 
      * but with that there's the issue of 2 being drawn at the same time and the global object
      * being rewritten
+     * 
+     * I THINK I NEED TO DO A DICTIONARY/VECTOR TO STORE THE COORDINATES AND SUCH
+     * FOR HANDLING OF MULTIPLE AT ONCE
+     * 
+     * I THINK JUST NEED A 2 KEY DICTIONARY: 
+     *  KEY 1: ATTACK NUMBER ID
+     *  KEY 2: OLD TILES
+     * 
+     * I CAN HAVE DIFFERENT DICITONARYS FOR EACH ATTACK SO
+     * MELEE_DICT
+     * RANGE_DICT
+     * 
+     * 
+     * OR The file calling to show the attack will do this:
+     * Show_attack( 1 );
+     * Turn ends;
+     * Remove_attack( 1 );
+     * ++i; 
+     * and only in remove_attack, delete the key from the dict
+     * --> so the file calling the function would have the double increments
+     *  show_attack increment starts at 0, remove_attack starts at 1
+     *  remove_attack( i );
+     *  if( i < show_attack_i )
+     *  {
+     *    ++i;
+     *  } 
      */
     showMeleeAttack = function( args )
     {
