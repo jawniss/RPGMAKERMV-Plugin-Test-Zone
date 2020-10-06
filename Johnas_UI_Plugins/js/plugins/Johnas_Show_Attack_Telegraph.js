@@ -115,9 +115,18 @@
      *  {
      *    ++i;
      *  } 
+     * 
+     * 
+     * 
+     *  Have the file callling the functions to use the x, y, z as coordinates
+     * then put it into a dict with the coords as the key, then have 4 values associated
+     * with it (top, left, right, bottom tiles)
      */
     showMeleeAttack = function( args )
     {
+      /**
+       * I could reuse this structure if I put an array into the dict
+       */
       var x = eval(args.shift());
       var y = eval(args.shift());
       var z = eval(args.shift());
@@ -125,11 +134,58 @@
       console.log( "Showing melee attack" );
 
       console.log( "Tile ", x, " ", y, " ", z, " is centre of attack" );
-      var oldTileLeft = $gameMap.tileId( x - 1, y, z );
-      var oldTileRight = $gameMap.tileId( x + 1, y, z );
-      var oldTileUp = $gameMap.tileId( x, y - 1, z );
-      var oldTileDown = $gameMap.tileId( x, y + 1, z );
+      // var oldTileLeft = $gameMap.tileId( x - 1, y, z );
+      // var oldTileRight = $gameMap.tileId( x + 1, y, z );
+      // var oldTileUp = $gameMap.tileId( x, y - 1, z );
+      // var oldTileDown = $gameMap.tileId( x, y + 1, z );
       
+      // var xString = x.toString();
+      // var xLeftString = ( x - 1 ).toString();
+      // var xRightString = ( x + 1 ).toString();
+
+      // var yString = y.toString();
+      // var yUpString = ( y - 1 ).toString();
+      // var yDownString = ( y + 1 ).toString();
+
+      // var zString = z.toString();
+
+      var myInterpreter = new Game_Interpreter();
+
+      // myInterpreter.pluginCommand('ChangeTile', [ xLeftString, yString, zString, '2386' ] );
+      // myInterpreter.pluginCommand('ChangeTile', [ xRightString, yString, zString, '2386' ] );
+      // myInterpreter.pluginCommand('ChangeTile', [ xString, yUpString, zString, '2386' ] );
+      // myInterpreter.pluginCommand('ChangeTile', [ xString, yDownString, zString, '2386' ] );
+
+      console.log( "Done showing melee attack" );
+    }
+
+    removeMeleeAttack = function() 
+    {
+
+    }
+
+    var redrawMeleeAttackDict = [];
+    var meleeAttackRedrawCounter = 1;
+
+    meleeAttackDict = function( args )
+    {
+
+
+      var x = eval(args.shift());
+      var y = eval(args.shift());
+      var z = eval(args.shift());
+
+      /**
+       * tileId's of the tiles being changed that need to be redrawn after
+       */
+      var idOldTileLeft = $gameMap.tileId( x - 1, y, z );
+      var idOldTileRight = $gameMap.tileId( x + 1, y, z );
+      var idOldTileUp = $gameMap.tileId( x, y - 1, z );
+      var idOldTileDown = $gameMap.tileId( x, y + 1, z );
+
+      /**
+       * Getting coordinates of the affected tiles
+       */
       var xString = x.toString();
       var xLeftString = ( x - 1 ).toString();
       var xRightString = ( x + 1 ).toString();
@@ -140,21 +196,29 @@
 
       var zString = z.toString();
 
-      var myInterpreter = new Game_Interpreter();
+      var oldLeft = [ xLeftString, yString, zString, idOldTileLeft ];
+      var oldRight = [ xRightString, yString, zString, idOldTileRight ];
+      var oldUp = [ xString, yUpString, zString, idOldTileUp ];
+      var oldDown = [ xString, yDownString, zString, idOldTileDown ];
 
-      myInterpreter.pluginCommand('ChangeTile', [ xLeftString, yString, zString, '2386' ] );
-      myInterpreter.pluginCommand('ChangeTile', [ xRightString, yString, zString, '2386' ] );
-      myInterpreter.pluginCommand('ChangeTile', [ xString, yUpString, zString, '2386' ] );
-      myInterpreter.pluginCommand('ChangeTile', [ xString, yDownString, zString, '2386' ] );
+      redrawMeleeAttackDict.push( 
+        {
+          meleeAttackId: meleeAttackRedrawCounter,
+          oldLeftTile: oldLeft,
+          oldRightTile: oldRight,
+          oldUpTile: oldUp,
+          oldDownTile: oldDown
+        }
+      )
 
-      console.log( "Done showing melee attack" );
+      console.log( redrawMeleeAttackDict[ 0 ].meleeAttackId );
+      console.log( redrawMeleeAttackDict[ 0 ].oldLeftTile );
+      console.log( redrawMeleeAttackDict[ 0 ].oldRightTile );
+      console.log( redrawMeleeAttackDict[ 0 ].oldUpTile );
+      console.log( redrawMeleeAttackDict[ 0 ].oldDownTile );
+
+      ++meleeAttackRedrawCounter;
     }
-
-    removeMeleeAttack = function() 
-    {
-
-    }
-
 
 
     // 75 is key "K"
@@ -199,7 +263,7 @@
             case 'MELEE':
                 // $gameMap.copyTiles();
                 console.log( "MELEE CASE" );
-                showMeleeAttack( args );
+                meleeAttackDict( args );
                 break;
             // case 'CHANGETILE':
             //     $gameMap.changeTile(args);
