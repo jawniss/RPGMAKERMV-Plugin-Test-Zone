@@ -9,6 +9,12 @@
     // 75 is key "K"
     Input.keyMapper[ "75" ] = "REMOVE MELEE ATTACKS";
 
+    // 78 is key "N"
+    Input.keyMapper[ "78" ] = "SHOW MELEE ATTACKS 2";
+
+    // 77 is key "M"
+    Input.keyMapper[ "77" ] = "REMOVE MELEE ATTACKS 2";
+
     // Have to watch out - _alias .. is used in hearts_working so have to
     // have different names
     _alias_scene_map_melee = Scene_Map.prototype.update;
@@ -35,6 +41,27 @@
             meleeInterpreter.pluginCommand( 'MELEE', [ '5', '5', '0', 'REMOVE' ] );
 
             console.log( "Done the 'Pressed K' comand" );
+        } else if( Input.isTriggered( "SHOW MELEE ATTACKS 2" ) )
+        {
+            console.log( "The N button has been pressed" );
+
+            /**
+             * Working function that works as "Plugin command"
+             */
+            var meleeInterpreter = new Game_Interpreter()
+            meleeInterpreter.pluginCommand( 'MELEE', [ '10', '10', '0', 'SHOW' ] );
+
+            console.log( "Done the 'Pressed N' comand" );
+        } else if( Input.isTriggered( "REMOVE MELEE ATTACKS 2" ) ) {
+            console.log( "The M button has been pressed" );
+
+            /**
+             * Working function that works as "Plugin command"
+             */
+            var meleeInterpreter = new Game_Interpreter()
+            meleeInterpreter.pluginCommand( 'MELEE', [ '10', '10', '0', 'REMOVE' ] );
+
+            console.log( "Done the 'Pressed M' comand" );
         }
     };
 })();  // dont touch this.

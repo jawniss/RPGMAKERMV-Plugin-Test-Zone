@@ -111,11 +111,19 @@
       // var y = eval(args.shift());
       // var z = eval(args.shift());
 
+      /**
+       * JS DOES BY REFERENCE
+       */
+      // var localOldLeft = args.oldLeftTile;
+      // var localOldRight = args.oldRightTile;
+      // var localOldUp = args.oldUpTile;
+      // var localOldDown = args.oldDownTile;
 
-      var localOldLeft = args.oldLeftTile;
-      var localOldRight = args.oldRightTile;
-      var localOldUp = args.oldUpTile;
-      var localOldDown = args.oldDownTile;
+
+      var localOldLeft = Object.create( args.oldLeftTile );
+      var localOldRight = Object.create( args.oldRightTile );
+      var localOldUp = Object.create( args.oldUpTile );
+      var localOldDown = Object.create( args.oldDownTile );
 
 
 
@@ -126,18 +134,18 @@
       console.log( localOldUp );
       console.log( localOldDown );
 
-      localOldLeft[ 3 ] = '2386';
-      localOldRight[ 3 ] = '2386';
-      localOldUp[ 3 ] = '2386';
-      localOldDown[ 3 ] = '2386';
-
       /**
        * Redudnant, but i wanted to keep clarity
        */
-      var newLeft = localOldLeft;
-      var newRight = localOldRight;
-      var newUp = localOldUp;
-      var newDown = localOldDown;
+      var newLeft = Object.create( localOldLeft );
+      var newRight = Object.create( localOldRight );
+      var newUp = Object.create( localOldUp );
+      var newDown = Object.create( localOldDown );
+
+      newLeft[ 3 ] = '2386';
+      newRight[ 3 ] = '2386';
+      newUp[ 3 ] = '2386';
+      newDown[ 3 ] = '2386';
 
       // console.log( "New left" );
       // // ["4", "5", "0", "2386"]
@@ -146,25 +154,7 @@
 
 
 
-
-
-
       var myInterpreter = new Game_Interpreter();
-
-
-
-
-
-      console.log( "Seeing if dict element still here 5" );
-      console.log( redrawMeleeAttackDict[ 0 ].meleeAttackId );
-      console.log( redrawMeleeAttackDict[ 0 ].oldLeftTile );
-      console.log( redrawMeleeAttackDict[ 0 ].oldRightTile );
-      console.log( redrawMeleeAttackDict[ 0 ].oldUpTile );
-      console.log( redrawMeleeAttackDict[ 0 ].oldDownTile );
-      console.log( "Done showing if sitll here" );
-
-
-
 
 
       /**
@@ -185,32 +175,10 @@
 
 
 
-      // myInterpreter.pluginCommand('ChangeTile', newLeft );
-      // myInterpreter.pluginCommand('ChangeTile', newRight );
-      // myInterpreter.pluginCommand('ChangeTile', newUp );
-      // myInterpreter.pluginCommand('ChangeTile', newDown );
-
-
-
-      /**
-       * This lets the dict untouched
-       */
-      myInterpreter.pluginCommand('ChangeTile', [ '1', '1', '0', '4'] );
-
-
-
-
-
-
-      console.log( "Seeing if dict element still here 6" );
-      console.log( redrawMeleeAttackDict[ 0 ].meleeAttackId );
-      console.log( redrawMeleeAttackDict[ 0 ].oldLeftTile );
-      console.log( redrawMeleeAttackDict[ 0 ].oldRightTile );
-      console.log( redrawMeleeAttackDict[ 0 ].oldUpTile );
-      console.log( redrawMeleeAttackDict[ 0 ].oldDownTile );
-      console.log( "Done showing if sitll here" );
-
-
+      myInterpreter.pluginCommand('ChangeTile', newLeft );
+      myInterpreter.pluginCommand('ChangeTile', newRight );
+      myInterpreter.pluginCommand('ChangeTile', newUp );
+      myInterpreter.pluginCommand('ChangeTile', newDown );
 
 
       console.log( "Done showing melee attack" );
@@ -225,17 +193,17 @@
 
     removeMeleeAttack = function( args ) 
     {
-      var oldLeft = args.oldLeftTile;
-      var oldRight = args.oldRightTile;
-      var oldUp = args.oldUpTile;
-      var oldDown = args.oldDownTile;
+      var localOldLeft = Object.create( args.oldLeftTile );
+      var localOldRight = Object.create( args.oldRightTile );
+      var localOldUp = Object.create( args.oldUpTile );
+      var localOldDown = Object.create( args.oldDownTile );
 
       console.log( "Inside removeMeleeAttack" );
       // ["4", "5", "0", 2816]
-      console.log( oldLeft );
-      console.log( oldRight );
-      console.log( oldUp );
-      console.log( oldDown );
+      console.log( localOldLeft );
+      console.log( localOldRight );
+      console.log( localOldUp );
+      console.log( localOldDown );
 
       var myInterpreter = new Game_Interpreter();
 
@@ -244,10 +212,15 @@
       // myInterpreter.pluginCommand('ChangeTile', [ xString, yUpString, zString, '2386' ] );
       // myInterpreter.pluginCommand('ChangeTile', [ xString, yDownString, zString, '2386' ] );
 
-      myInterpreter.pluginCommand('ChangeTile', oldLeft );
-      myInterpreter.pluginCommand('ChangeTile', oldRight );
-      myInterpreter.pluginCommand('ChangeTile', oldUp );
-      myInterpreter.pluginCommand('ChangeTile', oldDown );
+      /**
+       * I think this may theoretically remove it from the dict? cus it's so janky
+       */
+      myInterpreter.pluginCommand('ChangeTile', localOldLeft );
+      myInterpreter.pluginCommand('ChangeTile', localOldRight );
+      myInterpreter.pluginCommand('ChangeTile', localOldUp );
+      myInterpreter.pluginCommand('ChangeTile', localOldDown );
+
+      redrawMeleeAttackDict.pop();
 
       console.log( "Done removing melee attack" );
     }
@@ -262,6 +235,10 @@
       var x = eval(args.shift());
       var y = eval(args.shift());
       var z = eval(args.shift());
+
+      console.log( x );
+      console.log( y );
+      console.log( z );
       // var showOrRemove = eval(args.shift());
       // var showOrRemove = args.shift();
 
@@ -321,62 +298,30 @@
       // }
 
 
-      /*
-      console.log( redrawMeleeAttackDict[ 0 ].meleeAttackId );
-      console.log( redrawMeleeAttackDict[ 0 ].oldLeftTile );
-      console.log( redrawMeleeAttackDict[ 0 ].oldRightTile );
-      console.log( redrawMeleeAttackDict[ 0 ].oldUpTile );
-      console.log( redrawMeleeAttackDict[ 0 ].oldDownTile );
+      // /*
+      for( var abc = 0; abc <= Object.keys( redrawMeleeAttackDict ).length - 1; ++abc )
+      {
+        console.log( "ABC: " );
+        console.log( abc );
+        console.log( redrawMeleeAttackDict[ abc ].meleeAttackId );
+        console.log( redrawMeleeAttackDict[ abc ].oldLeftTile );
+        console.log( redrawMeleeAttackDict[ abc ].oldRightTile );
+        console.log( redrawMeleeAttackDict[ abc ].oldUpTile );
+        console.log( redrawMeleeAttackDict[ abc ].oldDownTile );
+      }
 
-      console.log( "x coord: " );
-      console.log( redrawMeleeAttackDict[ 0 ].oldLeftTile[ 0 ] );
+      // console.log( "x coord: " );
+      // console.log( redrawMeleeAttackDict[ 0 ].oldLeftTile[ 0 ] );
       
-      console.log( "y coord: " );
-      console.log( redrawMeleeAttackDict[ 0 ].oldLeftTile[ 1 ] );
+      // console.log( "y coord: " );
+      // console.log( redrawMeleeAttackDict[ 0 ].oldLeftTile[ 1 ] );
 
-      console.log( "Show or remove?" );
-      console.log( showOrRemove );
-      */
+      // console.log( "Show or remove?" );
+      // console.log( showOrRemove );
+      // */
 
       // ++meleeAttackRedrawCounter;
     }
-
-
-
-
-
-
-
-
-
-
-    // // 75 is key "K"
-    // Input.keyMapper[ "75" ] = "Attack Finished Redraw OG";
-    // // Have to watch out - _alias .. is used in hearts_working so have to
-    // // have different names
-    // _alias_scene_map_redraw_og_tiles = Scene_Map.prototype.update;
-    // Scene_Map.prototype.update = function() {
-    //   _alias_scene_map_redraw_og_tiles.call( this );
-    //     if( Input.isTriggered( "Attack Finished Redraw OG" ) )
-    //     {
-    //         console.log( "The K button has been pressed" );
-
-    //         /**
-    //          * Working function that works as "Plugin command"
-    //          */
-    //         var myInterpreter = new Game_Interpreter();
-    //         myInterpreter.pluginCommand('ChangeTile', ['3', '2', '0', '2816']);
-    //         /**
-    //          * ChangeTile 4 3 0 1
-    //          * Changetile( x, y, z, tileID );
-    //          */
-
-    //         console.log( "Tile ID at 3, 2, 0" );
-    //         console.log( $gameMap.tileId( 3, 2, 0 ) );
-
-    //         console.log( "Done the 'Pressed K' comand" );
-    //     }
-    // };
 
 
 
