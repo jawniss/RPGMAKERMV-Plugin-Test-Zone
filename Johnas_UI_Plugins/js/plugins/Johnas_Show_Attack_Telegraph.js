@@ -38,18 +38,6 @@
       INTO THE GAME
   */
 
-/**
- * General idea for layout of this file:
- * have it act as a function that is called with the parameters of the 
- * location on the 2D grid (x and y coordinates) and the type of attack 
- * (melee, range, etc) so like telegraph( int x, int y, string attackType )
- * and so in the other enemy files whenever they attack, they just call this
- * function with the parameters from this file.
- * 
- * For now try to make general function where I can hard code the coordinates
- * and upon execution it'll make the four adjacent tiles red
- */
-
 
 ( function() 
 {  
@@ -86,20 +74,6 @@
      * MELEE_DICT
      * RANGE_DICT
      * 
-     * 
-     * OR The file calling to show the attack will do this:
-     * Show_attack( 1 );
-     * Turn ends;
-     * Remove_attack( 1 );
-     * ++i; 
-     * and only in remove_attack, delete the key from the dict
-     * --> so the file calling the function would have the double increments
-     *  show_attack increment starts at 0, remove_attack starts at 1
-     *  remove_attack( i );
-     *  if( i < show_attack_i )
-     *  {
-     *    ++i;
-     *  } 
      * 
      */
     showMeleeAttack = function( args )
@@ -287,17 +261,6 @@
       
 
 
-      /**
-       * I have to fix the counter - pretty sure it's not gonna line up
-       */
-      // if( showOrRemove == "SHOW" )
-      // {
-      //   showMeleeAttack( redrawMeleeAttackDict[ meleeAttackRedrawCounter ] );
-      // } else if( showOrRemove == "REMOVE" ) {
-      //   removeMeleeAttack( redrawMeleeAttackDict[ meleeAttackRedrawCounter ] );
-      // }
-
-
       // /*
       for( var abc = 0; abc <= Object.keys( redrawMeleeAttackDict ).length - 1; ++abc )
       {
@@ -353,7 +316,38 @@
                   showMeleeAttack( tempDictElement );
 
 
-
+                  /**
+                   * 
+                   * 
+                   * 
+                   * 
+                   * 
+                   * 
+                   * 
+                   *  I need to fix the meleeAttackRedrawCounter to handle
+                   * multiple attacks half n half so
+                   * show attack 1
+                   * show attack 2
+                   * remove attack 1
+                   * remove attack 2
+                   * 
+                   * 
+                   * right now it only works for 
+                   * show attack 1
+                   * remove attack 1
+                   * show attack 2
+                   * remove attack 2
+                   * 
+                   * 
+                   * 
+                   * 
+                   * 
+                   * 
+                   * 
+                   * 
+                   * 
+                   * 
+                   */
 
 
                 } else if( showOrRemove == "REMOVE" ) {
