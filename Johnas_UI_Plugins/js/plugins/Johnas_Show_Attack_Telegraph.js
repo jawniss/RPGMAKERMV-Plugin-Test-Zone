@@ -56,8 +56,8 @@
 	var parameters = PluginManager.parameters('Show_Attack_Telegraph');
        
 /////////////////////////////////////////////////////////////////////////////////
-    // 74 is key "J"
-    Input.keyMapper[ "74" ] = "TileID Checker ( 0, 0, 0 )";
+    // 70 is key "F"
+    Input.keyMapper[ "70" ] = "TileID Checker ( 0, 0, 0 )";
     // Have to watch out - _alias .. is used in hearts_working so have to
     // have different names
     _alias_scene_map_draw_attack_tiles = Scene_Map.prototype.update;
@@ -65,11 +65,11 @@
       _alias_scene_map_draw_attack_tiles.call( this );
         if( Input.isTriggered( "TileID Checker ( 0, 0, 0 )" ) )
         {
-            console.log( "The J button has been pressed" );
+            console.log( "The F button has been pressed" );
             console.log( "Tile ID at 0, 0, 0" );
             console.log( $gameMap.tileId( 0, 0, 0 ) );
 
-            console.log( "Done the 'Pressed J' comand" );
+            console.log( "Done the 'Pressed F' comand" );
         }
     };
 /////////////////////////////////////////////////////////////////////////////////
@@ -111,34 +111,131 @@
       // var y = eval(args.shift());
       // var z = eval(args.shift());
 
+
+      var localOldLeft = args.oldLeftTile;
+      var localOldRight = args.oldRightTile;
+      var localOldUp = args.oldUpTile;
+      var localOldDown = args.oldDownTile;
+
+
+
+      console.log( "Inside showMeleeAttack" );
+      // ["4", "5", "0", 2816]
+      console.log( localOldLeft );
+      console.log( localOldRight );
+      console.log( localOldUp );
+      console.log( localOldDown );
+
+      localOldLeft[ 3 ] = '2386';
+      localOldRight[ 3 ] = '2386';
+      localOldUp[ 3 ] = '2386';
+      localOldDown[ 3 ] = '2386';
+
+      /**
+       * Redudnant, but i wanted to keep clarity
+       */
+      var newLeft = localOldLeft;
+      var newRight = localOldRight;
+      var newUp = localOldUp;
+      var newDown = localOldDown;
+
+      // console.log( "New left" );
+      // // ["4", "5", "0", "2386"]
+      // console.log( newLeft );
+
+
+
+
+
+
+
+      var myInterpreter = new Game_Interpreter();
+
+
+
+
+
+      console.log( "Seeing if dict element still here 5" );
+      console.log( redrawMeleeAttackDict[ 0 ].meleeAttackId );
+      console.log( redrawMeleeAttackDict[ 0 ].oldLeftTile );
+      console.log( redrawMeleeAttackDict[ 0 ].oldRightTile );
+      console.log( redrawMeleeAttackDict[ 0 ].oldUpTile );
+      console.log( redrawMeleeAttackDict[ 0 ].oldDownTile );
+      console.log( "Done showing if sitll here" );
+
+
+
+
+
+      /**
+       * For some reason it's removing the element from the dict here
+       * IT'S CUS ALL THE NEW VARIABLES ARE BY REFERENCE 
+       * SO VAR A = 100
+       * VAR B = A
+       * B EQUALS 100 IF DO
+       * A = 20
+       * B NOW EQUALS 20
+       */
+
+      // myInterpreter.pluginCommand('ChangeTile', [ xLeftString, yString, zString, '2386' ] );
+      // myInterpreter.pluginCommand('ChangeTile', [ xRightString, yString, zString, '2386' ] );
+      // myInterpreter.pluginCommand('ChangeTile', [ xString, yUpString, zString, '2386' ] );
+      // myInterpreter.pluginCommand('ChangeTile', [ xString, yDownString, zString, '2386' ] );
+
+
+
+
+      // myInterpreter.pluginCommand('ChangeTile', newLeft );
+      // myInterpreter.pluginCommand('ChangeTile', newRight );
+      // myInterpreter.pluginCommand('ChangeTile', newUp );
+      // myInterpreter.pluginCommand('ChangeTile', newDown );
+
+
+
+      /**
+       * This lets the dict untouched
+       */
+      myInterpreter.pluginCommand('ChangeTile', [ '1', '1', '0', '4'] );
+
+
+
+
+
+
+      console.log( "Seeing if dict element still here 6" );
+      console.log( redrawMeleeAttackDict[ 0 ].meleeAttackId );
+      console.log( redrawMeleeAttackDict[ 0 ].oldLeftTile );
+      console.log( redrawMeleeAttackDict[ 0 ].oldRightTile );
+      console.log( redrawMeleeAttackDict[ 0 ].oldUpTile );
+      console.log( redrawMeleeAttackDict[ 0 ].oldDownTile );
+      console.log( "Done showing if sitll here" );
+
+
+
+
+      console.log( "Done showing melee attack" );
+    }
+
+
+
+
+
+
+
+
+    removeMeleeAttack = function( args ) 
+    {
       var oldLeft = args.oldLeftTile;
       var oldRight = args.oldRightTile;
       var oldUp = args.oldUpTile;
       var oldDown = args.oldDownTile;
 
-      console.log( "Inside showMeleeAttack" );
+      console.log( "Inside removeMeleeAttack" );
       // ["4", "5", "0", 2816]
       console.log( oldLeft );
       console.log( oldRight );
       console.log( oldUp );
       console.log( oldDown );
-
-      oldLeft[ 3 ] = '2386';
-      oldRight[ 3 ] = '2386';
-      oldUp[ 3 ] = '2386';
-      oldDown[ 3 ] = '2386';
-
-      /**
-       * Redudnant, but i wanted to keep clarity
-       */
-      var newLeft = oldLeft;
-      var newRight = oldRight;
-      var newUp = oldUp;
-      var newDown = oldDown;
-
-      // console.log( "New left" );
-      // // ["4", "5", "0", "2386"]
-      // console.log( newLeft );
 
       var myInterpreter = new Game_Interpreter();
 
@@ -147,17 +244,12 @@
       // myInterpreter.pluginCommand('ChangeTile', [ xString, yUpString, zString, '2386' ] );
       // myInterpreter.pluginCommand('ChangeTile', [ xString, yDownString, zString, '2386' ] );
 
-      myInterpreter.pluginCommand('ChangeTile', newLeft );
-      myInterpreter.pluginCommand('ChangeTile', newRight );
-      myInterpreter.pluginCommand('ChangeTile', newUp );
-      myInterpreter.pluginCommand('ChangeTile', newDown );
+      myInterpreter.pluginCommand('ChangeTile', oldLeft );
+      myInterpreter.pluginCommand('ChangeTile', oldRight );
+      myInterpreter.pluginCommand('ChangeTile', oldUp );
+      myInterpreter.pluginCommand('ChangeTile', oldDown );
 
-      console.log( "Done showing melee attack" );
-    }
-
-    removeMeleeAttack = function() 
-    {
-
+      console.log( "Done removing melee attack" );
     }
 
     var redrawMeleeAttackDict = [];
@@ -171,7 +263,7 @@
       var y = eval(args.shift());
       var z = eval(args.shift());
       // var showOrRemove = eval(args.shift());
-      var showOrRemove = args.shift();
+      // var showOrRemove = args.shift();
 
       /**
        * tileId's of the tiles being changed that need to be redrawn after
@@ -218,12 +310,15 @@
       
 
 
-      if( showOrRemove == "SHOW" )
-      {
-        showMeleeAttack( redrawMeleeAttackDict[ meleeAttackRedrawCounter ] );
-      } else if( showOrRemove == "REMOVE" ) {
-        removeMeleeAttack();
-      }
+      /**
+       * I have to fix the counter - pretty sure it's not gonna line up
+       */
+      // if( showOrRemove == "SHOW" )
+      // {
+      //   showMeleeAttack( redrawMeleeAttackDict[ meleeAttackRedrawCounter ] );
+      // } else if( showOrRemove == "REMOVE" ) {
+      //   removeMeleeAttack( redrawMeleeAttackDict[ meleeAttackRedrawCounter ] );
+      // }
 
 
       /*
@@ -242,7 +337,8 @@
       console.log( "Show or remove?" );
       console.log( showOrRemove );
       */
-      ++meleeAttackRedrawCounter;
+
+      // ++meleeAttackRedrawCounter;
     }
 
 
@@ -254,33 +350,33 @@
 
 
 
-    // 75 is key "K"
-    Input.keyMapper[ "75" ] = "Attack Finished Redraw OG";
-    // Have to watch out - _alias .. is used in hearts_working so have to
-    // have different names
-    _alias_scene_map_redraw_og_tiles = Scene_Map.prototype.update;
-    Scene_Map.prototype.update = function() {
-      _alias_scene_map_redraw_og_tiles.call( this );
-        if( Input.isTriggered( "Attack Finished Redraw OG" ) )
-        {
-            console.log( "The K button has been pressed" );
+    // // 75 is key "K"
+    // Input.keyMapper[ "75" ] = "Attack Finished Redraw OG";
+    // // Have to watch out - _alias .. is used in hearts_working so have to
+    // // have different names
+    // _alias_scene_map_redraw_og_tiles = Scene_Map.prototype.update;
+    // Scene_Map.prototype.update = function() {
+    //   _alias_scene_map_redraw_og_tiles.call( this );
+    //     if( Input.isTriggered( "Attack Finished Redraw OG" ) )
+    //     {
+    //         console.log( "The K button has been pressed" );
 
-            /**
-             * Working function that works as "Plugin command"
-             */
-            var myInterpreter = new Game_Interpreter();
-            myInterpreter.pluginCommand('ChangeTile', ['3', '2', '0', '2816']);
-            /**
-             * ChangeTile 4 3 0 1
-             * Changetile( x, y, z, tileID );
-             */
+    //         /**
+    //          * Working function that works as "Plugin command"
+    //          */
+    //         var myInterpreter = new Game_Interpreter();
+    //         myInterpreter.pluginCommand('ChangeTile', ['3', '2', '0', '2816']);
+    //         /**
+    //          * ChangeTile 4 3 0 1
+    //          * Changetile( x, y, z, tileID );
+    //          */
 
-            console.log( "Tile ID at 3, 2, 0" );
-            console.log( $gameMap.tileId( 3, 2, 0 ) );
+    //         console.log( "Tile ID at 3, 2, 0" );
+    //         console.log( $gameMap.tileId( 3, 2, 0 ) );
 
-            console.log( "Done the 'Pressed K' comand" );
-        }
-    };
+    //         console.log( "Done the 'Pressed K' comand" );
+    //     }
+    // };
 
 
 
@@ -301,7 +397,24 @@
             case 'MELEE':
                 // $gameMap.copyTiles();
                 console.log( "MELEE CASE" );
-                meleeAttackDict( args );
+                // meleeAttackDict( args );
+
+                var showOrRemove = args.slice( -1 ).pop();
+                if( showOrRemove == "SHOW" )
+                {
+                  console.log( "Showing attack" );
+                  meleeAttackDict( args );
+                  var tempDictElement = redrawMeleeAttackDict[ meleeAttackRedrawCounter ];
+                  showMeleeAttack( tempDictElement );
+
+
+
+
+
+                } else if( showOrRemove == "REMOVE" ) {
+                  console.log( "Removing attack" );
+                  removeMeleeAttack( redrawMeleeAttackDict[ meleeAttackRedrawCounter ] );
+                }
                 break;
             // case 'CHANGETILE':
             //     $gameMap.changeTile(args);
