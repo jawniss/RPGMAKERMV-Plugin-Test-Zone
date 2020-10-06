@@ -155,6 +155,25 @@
       myInterpreter.pluginCommand('ChangeTile', newDown );
 
 
+      console.log( "" );
+      console.log( "" );
+      console.log( "" );
+      console.log( "Show melee attack function" );
+      for( var abc = 0; abc <= Object.keys( redrawMeleeAttackDict ).length - 1; ++abc )
+      {
+        console.log( "ABC: " );
+        console.log( abc );
+        console.log( redrawMeleeAttackDict[ abc ].oldLeftTile );
+        console.log( redrawMeleeAttackDict[ abc ].oldRightTile );
+        console.log( redrawMeleeAttackDict[ abc ].oldUpTile );
+        console.log( redrawMeleeAttackDict[ abc ].oldDownTile );
+      }
+      console.log( "" );
+      console.log( "" );
+      console.log( "" );
+
+
+
       console.log( "Done showing melee attack" );
     }
 
@@ -194,17 +213,70 @@
       myInterpreter.pluginCommand('ChangeTile', localOldUp );
       myInterpreter.pluginCommand('ChangeTile', localOldDown );
 
-      redrawMeleeAttackDict.pop();
+
+
+      console.log( "" );
+      console.log( "" );
+      console.log( "" );
+      console.log( "remove melee attack before pop" );
+      for( var abc = 0; abc <= Object.keys( redrawMeleeAttackDict ).length - 1; ++abc )
+      {
+        console.log( "ABC: " );
+        console.log( abc );
+        console.log( redrawMeleeAttackDict[ abc ].oldLeftTile );
+        console.log( redrawMeleeAttackDict[ abc ].oldRightTile );
+        console.log( redrawMeleeAttackDict[ abc ].oldUpTile );
+        console.log( redrawMeleeAttackDict[ abc ].oldDownTile );
+      }
+      console.log( "" );
+      console.log( "" );
+      console.log( "" );
+
+
+      redrawMeleeAttackDict.shift();
+
+
+      console.log( "" );
+      console.log( "" );
+      console.log( "" );
+      console.log( "remove melee attack after pop" );
+      for( var abc = 0; abc <= Object.keys( redrawMeleeAttackDict ).length - 1; ++abc )
+      {
+        console.log( "ABC: " );
+        console.log( abc );
+        console.log( redrawMeleeAttackDict[ abc ].oldLeftTile );
+        console.log( redrawMeleeAttackDict[ abc ].oldRightTile );
+        console.log( redrawMeleeAttackDict[ abc ].oldUpTile );
+        console.log( redrawMeleeAttackDict[ abc ].oldDownTile );
+      }
+      console.log( "" );
+      console.log( "" );
+      console.log( "" );
+
+
+
+
 
       console.log( "Done removing melee attack" );
     }
+
+
+
+
+
+
+
+
+
+
+
 
     var redrawMeleeAttackDict = [];
     var meleeAttackRedrawCounter = 0;
 
     meleeAttackDict = function( args )
     {
-
+      console.log( "meleeAttackDict" );
 
       var x = eval(args.shift());
       var y = eval(args.shift());
@@ -251,39 +323,12 @@
        */
       redrawMeleeAttackDict.push( 
         {
-          meleeAttackId: meleeAttackRedrawCounter,
           oldLeftTile: oldLeft,
           oldRightTile: oldRight,
           oldUpTile: oldUp,
           oldDownTile: oldDown
         }
       )
-      
-
-
-      // /*
-      for( var abc = 0; abc <= Object.keys( redrawMeleeAttackDict ).length - 1; ++abc )
-      {
-        console.log( "ABC: " );
-        console.log( abc );
-        console.log( redrawMeleeAttackDict[ abc ].meleeAttackId );
-        console.log( redrawMeleeAttackDict[ abc ].oldLeftTile );
-        console.log( redrawMeleeAttackDict[ abc ].oldRightTile );
-        console.log( redrawMeleeAttackDict[ abc ].oldUpTile );
-        console.log( redrawMeleeAttackDict[ abc ].oldDownTile );
-      }
-
-      // console.log( "x coord: " );
-      // console.log( redrawMeleeAttackDict[ 0 ].oldLeftTile[ 0 ] );
-      
-      // console.log( "y coord: " );
-      // console.log( redrawMeleeAttackDict[ 0 ].oldLeftTile[ 1 ] );
-
-      // console.log( "Show or remove?" );
-      // console.log( showOrRemove );
-      // */
-
-      // ++meleeAttackRedrawCounter;
     }
 
 
@@ -312,8 +357,8 @@
                 {
                   console.log( "Showing attack" );
                   meleeAttackDict( args );
-                  var tempDictElement = redrawMeleeAttackDict[ meleeAttackRedrawCounter ];
-                  showMeleeAttack( tempDictElement );
+                  // var tempDictElement = redrawMeleeAttackDict[ Object.keys( redrawMeleeAttackDict ).length - 1 ];
+                  showMeleeAttack( redrawMeleeAttackDict[ Object.keys( redrawMeleeAttackDict ).length - 1 ] );
 
 
                   /**
@@ -352,7 +397,10 @@
 
                 } else if( showOrRemove == "REMOVE" ) {
                   console.log( "Removing attack" );
-                  removeMeleeAttack( redrawMeleeAttackDict[ meleeAttackRedrawCounter ] );
+                  if( Object.keys( redrawMeleeAttackDict ).length >= 1 )
+                  {
+                    removeMeleeAttack( redrawMeleeAttackDict[ 0 ] );
+                  }
                 }
                 break;
             // case 'CHANGETILE':
