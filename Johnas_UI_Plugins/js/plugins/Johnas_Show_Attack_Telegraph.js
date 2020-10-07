@@ -16,32 +16,31 @@
  /**
   * TO DO LIST:
 
-    - Figure out how to do the dredrawing, if another method? Issue with that is that
-      how does the new method know the old tileId's?
-
     - Make different cases for the different enemy attacks
 
-    - Find/think out how the other files will access the functions in here
-      - I'm thinking do via plugin command, 
-        var myInterpreter = new Game_Interpreter()
-        myInterpreter.pluginCommand('Show_Attack', ['x', 'y', 'z', 'type_of_attack']);
+    - Have to learn how to do the args thing
 
-      - Have to learn how to do the args thing
-    
-    - Put in waits after turning tile red before turning it back to old tile
-
-    - Extra info section in the top comment blocks to say "Shaz's Shaz_TileChanger.js"
-      is needed to be in the plugins
-
-    - MAJOR POTENTIAL ISSUE: DOING THE PLUGIN COMMAND WITH THE BUILT IN DEFAULT
-      RPG MAKER TILES, NOT SURE HOW IT WILL WORK WITH CUSTOM TILES THAT ARE IMPORTED
-      INTO THE GAME
+    - MUST TEST OFF MAP CASES
   */
 
+  /**
+   * Notes:
+   * 
+   *  - Not going to implement dictionary checking to see if the attack coordinates
+   *    are already there to increase performance
+   * 
+   *  - Extra info section in the top comment blocks to say "Shaz's Shaz_TileChanger.js"
+   *    is needed to be in the plugins
+   */
 
 ( function() 
 {  
-	var parameters = PluginManager.parameters('Show_Attack_Telegraph');
+  var parameters = PluginManager.parameters('Show_Attack_Telegraph');
+  
+  /**
+   * Global dictionary holding the melee attack tiles
+   */
+  var redrawMeleeAttackDict = [];
        
 /////////////////////////////////////////////////////////////////////////////////
     // 70 is key "F"
@@ -56,7 +55,6 @@
             console.log( "The F button has been pressed" );
             console.log( "Tile ID at 0, 0, 0" );
             console.log( $gameMap.tileId( 0, 0, 0 ) );
-
             console.log( "Done the 'Pressed F' comand" );
         }
     };
@@ -88,11 +86,6 @@
       /**
        * JS DOES BY REFERENCE
        */
-      // var localOldLeft = args.oldLeftTile;
-      // var localOldRight = args.oldRightTile;
-      // var localOldUp = args.oldUpTile;
-      // var localOldDown = args.oldDownTile;
-
 
       var localOldLeft = Object.create( args.oldLeftTile );
       var localOldRight = Object.create( args.oldRightTile );
@@ -178,12 +171,6 @@
     }
 
 
-
-
-
-
-
-
     removeMeleeAttack = function( args ) 
     {
       var localOldLeft = Object.create( args.oldLeftTile );
@@ -261,19 +248,6 @@
     }
 
 
-
-
-
-
-
-
-
-
-
-
-    var redrawMeleeAttackDict = [];
-    var meleeAttackRedrawCounter = 0;
-
     meleeAttackDict = function( args )
     {
       console.log( "meleeAttackDict" );
@@ -332,12 +306,6 @@
     }
 
 
-
-
-
-
-
-
     /**
      * Taking care of the "plugin command" command
      */
@@ -348,16 +316,13 @@
         switch( command.toUpperCase() ) 
         {
             case 'MELEE':
-                // $gameMap.copyTiles();
                 console.log( "MELEE CASE" );
-                // meleeAttackDict( args );
 
                 var showOrRemove = args.slice( -1 ).pop();
                 if( showOrRemove == "SHOW" )
                 {
                   console.log( "Showing attack" );
                   meleeAttackDict( args );
-                  // var tempDictElement = redrawMeleeAttackDict[ Object.keys( redrawMeleeAttackDict ).length - 1 ];
                   showMeleeAttack( redrawMeleeAttackDict[ Object.keys( redrawMeleeAttackDict ).length - 1 ] );
 
 

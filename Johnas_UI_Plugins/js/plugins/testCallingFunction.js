@@ -24,7 +24,7 @@
             /**
              * Working function that works as "Plugin command"
              */
-            var meleeInterpreter = new Game_Interpreter()
+            var meleeInterpreter = new Game_Interpreter();
             meleeInterpreter.pluginCommand( 'MELEE', [ '5', '5', '0', 'SHOW' ] );
 
             console.log( "Done the 'Pressed J' comand" );
@@ -34,7 +34,7 @@
             /**
              * Working function that works as "Plugin command"
              */
-            var meleeInterpreter = new Game_Interpreter()
+            var meleeInterpreter = new Game_Interpreter();
             meleeInterpreter.pluginCommand( 'MELEE', [ 'REMOVE' ] );
 
             console.log( "Done the 'Pressed K' comand" );
@@ -45,7 +45,7 @@
             /**
              * Working function that works as "Plugin command"
              */
-            var meleeInterpreter = new Game_Interpreter()
+            var meleeInterpreter = new Game_Interpreter();
             meleeInterpreter.pluginCommand( 'MELEE', [ '10', '10', '0', 'SHOW' ] );
 
             console.log( "Done the 'Pressed N' comand" );
