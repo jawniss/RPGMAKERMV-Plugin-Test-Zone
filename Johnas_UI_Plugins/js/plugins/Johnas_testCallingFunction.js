@@ -22,6 +22,7 @@
         {
             console.log( "The J button has been pressed" );
 
+            console.log( "Removed console outputs" );
             /**
              * Working function that works as "Plugin command"
              */

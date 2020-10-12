@@ -47,6 +47,15 @@
     Input.keyMapper[ "70" ] = "TileID Checker ( 0, 0, 0 )";
     // Have to watch out - _alias .. is used in hearts_working so have to
     // have different names
+
+    /**
+     * Looks like max B/C overlay tiles is two on one tile.
+     * If there's only one overlay, the overlay tile appears on z layer 3.
+     * If there's two overlay tiles, the bottom overlay tile appears on z layer 2.
+     * The top overlay tile appears on z layer 3.
+     * 
+     * --> The most top, visible overlay tile is always on layer 3.
+     */
     _alias_scene_map_draw_attack_tiles = Scene_Map.prototype.update;
     Scene_Map.prototype.update = function() {
       _alias_scene_map_draw_attack_tiles.call( this );
@@ -55,6 +64,10 @@
             console.log( "The F button has been pressed" );
             console.log( "Tile ID at 0, 0, 0" );
             console.log( $gameMap.tileId( 0, 0, 0 ) );
+            console.log( "Tile ID at 0, 0, 1 ( B Page )" );
+            console.log( $gameMap.tileId( 0, 0, 3 ) );
+            console.log( "Tile ID at 0, 0, 2 ( C Page )" );
+            console.log( $gameMap.tileId( 0, 0, 2 ) );
             console.log( "Done the 'Pressed F' comand" );
         }
     };
@@ -109,10 +122,10 @@
       var newUp = Object.create( localOldUp );
       var newDown = Object.create( localOldDown );
 
-      newLeft[ 3 ] = '2386';
-      newRight[ 3 ] = '2386';
-      newUp[ 3 ] = '2386';
-      newDown[ 3 ] = '2386';
+      newLeft[ 3 ] = '2816';
+      newRight[ 3 ] = '4359';
+      newUp[ 3 ] = '4359';
+      newDown[ 3 ] = '4359';
 
       // console.log( "New left" );
       // // ["4", "5", "0", "2386"]
@@ -148,22 +161,22 @@
       myInterpreter.pluginCommand('ChangeTile', newDown );
 
 
-      console.log( "" );
-      console.log( "" );
-      console.log( "" );
-      console.log( "Show melee attack function" );
-      for( var abc = 0; abc <= Object.keys( redrawMeleeAttackDict ).length - 1; ++abc )
-      {
-        console.log( "ABC: " );
-        console.log( abc );
-        console.log( redrawMeleeAttackDict[ abc ].oldLeftTile );
-        console.log( redrawMeleeAttackDict[ abc ].oldRightTile );
-        console.log( redrawMeleeAttackDict[ abc ].oldUpTile );
-        console.log( redrawMeleeAttackDict[ abc ].oldDownTile );
-      }
-      console.log( "" );
-      console.log( "" );
-      console.log( "" );
+      // console.log( "" );
+      // console.log( "" );
+      // console.log( "" );
+      // console.log( "Show melee attack function" );
+      // for( var abc = 0; abc <= Object.keys( redrawMeleeAttackDict ).length - 1; ++abc )
+      // {
+      //   console.log( "ABC: " );
+      //   console.log( abc );
+      //   console.log( redrawMeleeAttackDict[ abc ].oldLeftTile );
+      //   console.log( redrawMeleeAttackDict[ abc ].oldRightTile );
+      //   console.log( redrawMeleeAttackDict[ abc ].oldUpTile );
+      //   console.log( redrawMeleeAttackDict[ abc ].oldDownTile );
+      // }
+      // console.log( "" );
+      // console.log( "" );
+      // console.log( "" );
 
 
 
@@ -202,43 +215,43 @@
 
 
 
-      console.log( "" );
-      console.log( "" );
-      console.log( "" );
-      console.log( "remove melee attack before pop" );
-      for( var abc = 0; abc <= Object.keys( redrawMeleeAttackDict ).length - 1; ++abc )
-      {
-        console.log( "ABC: " );
-        console.log( abc );
-        console.log( redrawMeleeAttackDict[ abc ].oldLeftTile );
-        console.log( redrawMeleeAttackDict[ abc ].oldRightTile );
-        console.log( redrawMeleeAttackDict[ abc ].oldUpTile );
-        console.log( redrawMeleeAttackDict[ abc ].oldDownTile );
-      }
-      console.log( "" );
-      console.log( "" );
-      console.log( "" );
+      // console.log( "" );
+      // console.log( "" );
+      // console.log( "" );
+      // console.log( "remove melee attack before pop" );
+      // for( var abc = 0; abc <= Object.keys( redrawMeleeAttackDict ).length - 1; ++abc )
+      // {
+      //   console.log( "ABC: " );
+      //   console.log( abc );
+      //   console.log( redrawMeleeAttackDict[ abc ].oldLeftTile );
+      //   console.log( redrawMeleeAttackDict[ abc ].oldRightTile );
+      //   console.log( redrawMeleeAttackDict[ abc ].oldUpTile );
+      //   console.log( redrawMeleeAttackDict[ abc ].oldDownTile );
+      // }
+      // console.log( "" );
+      // console.log( "" );
+      // console.log( "" );
 
 
       redrawMeleeAttackDict.shift();
 
 
-      console.log( "" );
-      console.log( "" );
-      console.log( "" );
-      console.log( "remove melee attack after pop" );
-      for( var abc = 0; abc <= Object.keys( redrawMeleeAttackDict ).length - 1; ++abc )
-      {
-        console.log( "ABC: " );
-        console.log( abc );
-        console.log( redrawMeleeAttackDict[ abc ].oldLeftTile );
-        console.log( redrawMeleeAttackDict[ abc ].oldRightTile );
-        console.log( redrawMeleeAttackDict[ abc ].oldUpTile );
-        console.log( redrawMeleeAttackDict[ abc ].oldDownTile );
-      }
-      console.log( "" );
-      console.log( "" );
-      console.log( "" );
+      // console.log( "" );
+      // console.log( "" );
+      // console.log( "" );
+      // console.log( "remove melee attack after pop" );
+      // for( var abc = 0; abc <= Object.keys( redrawMeleeAttackDict ).length - 1; ++abc )
+      // {
+      //   console.log( "ABC: " );
+      //   console.log( abc );
+      //   console.log( redrawMeleeAttackDict[ abc ].oldLeftTile );
+      //   console.log( redrawMeleeAttackDict[ abc ].oldRightTile );
+      //   console.log( redrawMeleeAttackDict[ abc ].oldUpTile );
+      //   console.log( redrawMeleeAttackDict[ abc ].oldDownTile );
+      // }
+      // console.log( "" );
+      // console.log( "" );
+      // console.log( "" );
 
 
 
