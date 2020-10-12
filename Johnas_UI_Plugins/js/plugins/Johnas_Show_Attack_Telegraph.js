@@ -62,12 +62,12 @@
         if( Input.isTriggered( "TileID Checker ( 0, 0, 0 )" ) )
         {
             console.log( "The F button has been pressed" );
-            console.log( "Tile ID at 0, 0, 0" );
+            console.log( "Tile ID at 0, 0, 0 ( actual tile )" );
             console.log( $gameMap.tileId( 0, 0, 0 ) );
-            console.log( "Tile ID at 0, 0, 1 ( B Page )" );
-            console.log( $gameMap.tileId( 0, 0, 3 ) );
-            console.log( "Tile ID at 0, 0, 2 ( C Page )" );
+            console.log( "Tile ID at 0, 0, 1 ( bottom overlay tile )" );
             console.log( $gameMap.tileId( 0, 0, 2 ) );
+            console.log( "Tile ID at 0, 0, 2 ( top overlay tile )" );
+            console.log( $gameMap.tileId( 0, 0, 3 ) );
             console.log( "Done the 'Pressed F' comand" );
         }
     };
