@@ -267,9 +267,10 @@
    */
   displayBaseTile = function( args )
   {
-    var desiredTileId = eval( args.shift() );
-    var x = eval( args.shift() );
-    var y = eval( args.shift() );
+    console.log( "Displaybasetile: ");
+    var desiredTileId = args[ 0 ];
+    var x = args[ 2 ];
+    var y = args[ 3 ];
 
     console.log( "desiredTileId, x, y: " );
     console.log( desiredTileId );
@@ -277,8 +278,15 @@
     console.log( y );
 
 
+    /**
+     * Element still in array
+     */
     var myInterpreter = new Game_Interpreter();
     myInterpreter.pluginCommand( 'ChangeTile', [ x, y, 0, desiredTileId ] );
+
+    threeLayersDict.forEach( function( entry ) {
+      console.log( entry );
+    } );
   }
 
 
@@ -376,13 +384,18 @@
           break;
         case 'DISPLAYBASETILE':
           console.log( "DISPLAYBASETILE CASE" );
-          
-          threeLayersDictPush( args );
+          var tempArgs = Object.create( args );
+          console.log( "Tempargs: ", tempArgs );
+
+          threeLayersDictPush( tempArgs );
+          console.log( "Tempargs 2 : ", tempArgs );
           threeLayersDict.forEach( function( entry ) {
             console.log( entry );
           } );
           // console.log( "Args: ", args );
-          displayBaseTile( args );
+          console.log( "Tempargs3 : ", tempArgs );
+
+          displayBaseTile( tempArgs );
           break;
         default:
           console.log( "No case detected" );
