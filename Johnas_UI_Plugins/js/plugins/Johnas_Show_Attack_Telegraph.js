@@ -18,9 +18,9 @@
 
     - Make different cases for the different enemy attacks
 
-    - Have to learn how to do the args thing
-
     - MUST TEST OFF MAP CASES
+
+    - Might have to change the dict for each z layer
   */
 
   /**
@@ -55,6 +55,10 @@
      * The top overlay tile appears on z layer 3.
      * 
      * --> The most top, visible overlay tile is always on layer 3.
+     * 
+     * Player can walk over B/C pages if the collision is set to allow player over 
+     * in the systems tab of Tilesets. 'X' means player CANNOT walk on top, 'O'
+     * means player CAN walk on top.
      */
     _alias_scene_map_draw_attack_tiles = Scene_Map.prototype.update;
     Scene_Map.prototype.update = function() {
@@ -110,13 +114,15 @@
         var newUp = Object.create( localOldUp );
         var newDown = Object.create( localOldDown );
   
-        newLeft[ 3 ] = '2386';
+        newLeft[ 3 ] = '2';
+        newLeft[ 2 ] = '3';
         newRight[ 3 ] = '2386';
         newUp[ 3 ] = '2386';
         newDown[ 3 ] = '2386';
   
         // console.log( "New left" );
-        // // ["4", "5", "0", "2386"]
+        // [ x, y, z, tileId ]
+        // ["4", "5", "0", "2386"]
         // console.log( newLeft );
   
         var myInterpreter = new Game_Interpreter();
