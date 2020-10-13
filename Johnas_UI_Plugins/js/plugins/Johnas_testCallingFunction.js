@@ -10,6 +10,9 @@
     // 75 is key "K"
     Input.keyMapper[ "75" ] = "REMOVE MELEE ATTACKS";
 
+    // 76 is key "L"
+    Input.keyMapper[ "76" ] = "DISPLAYBASETILE";
+
     // 78 is key "N"
     Input.keyMapper[ "78" ] = "SHOW MELEE ATTACKS 2";
 
@@ -40,8 +43,7 @@
             meleeInterpreter.pluginCommand( 'MELEE', [ 'REMOVE' ] );
 
             console.log( "Done the 'Pressed K' comand" );
-        } else if( Input.isTriggered( "SHOW MELEE ATTACKS 2" ) )
-        {
+        } else if( Input.isTriggered( "SHOW MELEE ATTACKS 2" ) ) {
             console.log( "The N button has been pressed" );
 
             /**
@@ -51,6 +53,11 @@
             meleeInterpreter.pluginCommand( 'MELEE', [ '10', '10', '0', 'SHOW' ] );
 
             console.log( "Done the 'Pressed N' comand" );
+        } else if( Input.isTriggered( "DISPLAYBASETILE" ) ) {
+            console.log( "The L Button has been ppressed" );
+            var displayBaseTileInterpreter = new Game_Interpreter();
+            // TileId, x, y
+            displayBaseTileInterpreter.pluginCommand( 'DISPLAYBASETILE', [ '2386', '215', '7', '7' ] );
         }
     };
 })();  // dont touch this.
