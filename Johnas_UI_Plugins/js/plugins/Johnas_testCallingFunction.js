@@ -16,6 +16,12 @@
     // 78 is key "N"
     Input.keyMapper[ "78" ] = "SHOW MELEE ATTACKS 2";
 
+    // 79 is key "O"
+    Input.keyMapper[ "79" ] = "DISPLAYOVERLAYTILE";
+    
+    // 66 is key "B"
+    Input.keyMapper[ "66" ] = "REMOVETILE";
+
     // Have to watch out - _alias .. is used in hearts_working so have to
     // have different names
     _alias_scene_map_melee = Scene_Map.prototype.update;
@@ -58,6 +64,16 @@
             var displayBaseTileInterpreter = new Game_Interpreter();
             // TileId, x, y
             displayBaseTileInterpreter.pluginCommand( 'DISPLAYBASETILE', [ '2386', '215', '7', '7' ] );
+        } else if( Input.isTriggered( "DISPLAYOVERLAYTILE" ) ) {
+            console.log( "The O Button has been ppressed" );
+            var displayOverlayTileInterpreter = new Game_Interpreter();
+            // TileId, x, y
+            displayOverlayTileInterpreter.pluginCommand( 'DISPLAYOVERLAYTILE', [ '2386', '1', '7', '7' ] );
+        } else if( Input.isTriggered( "REMOVETILE" ) ) {
+            console.log( "The B Button has been ppressed" );
+            var removeTileInterpreter = new Game_Interpreter();
+            // TileId, x, y
+            removeTileInterpreter.pluginCommand( 'REMOVETILE', [ '7', '7' ] );
         }
     };
 })();  // dont touch this.

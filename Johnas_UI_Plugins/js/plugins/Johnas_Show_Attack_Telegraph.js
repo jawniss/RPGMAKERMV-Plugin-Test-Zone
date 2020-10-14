@@ -290,27 +290,69 @@
   }
 
 
-  /**
-   * could iterate through entire dict, checking x and y coords
-   */
-  removeBaseTile = function( args )
-  {
-
-  }
-
-
   displayOverlayTile = function( args )
   {
+    console.log( "DisplayOverlaytile: ");
+    var desiredOverlayId = args[ 1 ];
+    var x = args[ 2 ];
+    var y = args[ 3 ];
 
+    console.log( "desiredOverlayId, x, y: " );
+    console.log( desiredOverlayId );
+    console.log( x );
+    console.log( y );
+
+
+    /**
+     * Element still in array
+     */
+    var myInterpreter = new Game_Interpreter();
+    // Have to remember the layer of z to be 3 otherwise black underground
+    myInterpreter.pluginCommand( 'ChangeTile', [ x, y, 3, desiredOverlayId ] );
   }
 
 
   /**
    * could iterate through entire dict, checking x and y coords
+   * 
+   * args = int x, int y
+   * 
+   * 
    */
-  removeOverlayTile = function( args )
+  removeTile = function( args )
   {
+    var x = args[ 0 ];
+    var y = args[ 1 ];
 
+    console.log( x );
+    console.log( y );
+
+    // none of this is working
+    // how to get the x and y of each dict entry to then compare
+    threeLayersDict.forEach( function( entry ) {
+      // console.log( entry );
+
+      console.log( "Entry[ 0 ]: ", entry[ 0 ] );
+      console.log( "Entry[ 1 ]: ", entry[ 1 ] );
+      console.log( "Entry: ", entry );
+
+
+      if( entry[ 0 ] == x && entry[ 1 ] == y )
+      {
+        console.log( "This one: ", entry );
+        // break;
+      }
+    } );
+
+    for( var index = 0; index < threeLayersDict.length; ++index )
+    {
+      console.log( "A: ", threeLayersDict[ index ][ 0 ] );
+      console.log( "B: ", threeLayersDict[ index ][ 1 ] );
+      if( threeLayersDict[ index ][ 0 ] == x && threeLayersDict[ index ][ 1 ] == y )
+      {
+        console.log( "INdex: ", index );
+      }
+    }
   }
 
 
@@ -322,7 +364,7 @@
    * 
     displayBaseTileInterpreter.pluginCommand( 'DISPLAYBASETILE', [ '2816', '215', '10', '10' ] );
    *
-   * 
+   * I should put in a check to see if the tile is already in the dict
    */
   threeLayersDictPush = function( args )
   {
@@ -338,22 +380,23 @@
     var idOldTileLayer2 = $gameMap.tileId( x, y, 2 );
     var idOldTileLayer3 = $gameMap.tileId( x, y, 3 );
 
-    /**
-     * Structure of each value of each element in the dict
-     */
-    var oldBaseTile = [ x, y, 0, idOldTileLayer0 ];
-    var oldBottomOverlayTile = [ x, y, 2, idOldTileLayer2 ];
-    var oldTopOverlayTile = [ x, y, 3, idOldTileLayer3 ];
 
     threeLayersDict.push(
       {
+        x: x,
+        y: y,
         desiredBaseTileId: desiredBaseTileId,
         desiredOverlayTileId: desiredOverlayTileId,
-        oldBaseTile: oldBaseTile,
-        oldBottomOverlayTile: oldBottomOverlayTile,
-        oldTopOverlayTile: oldTopOverlayTile
+        idOldTileLayer0: idOldTileLayer0,
+        idOldTileLayer2: idOldTileLayer2,
+        idOldTileLayer3: idOldTileLayer3
       }
     )
+
+    threeLayersDict.forEach( function( entry ) {
+      console.log( entry );
+    } );
+
   }
 
 
@@ -396,6 +439,27 @@
           console.log( "Tempargs3 : ", tempArgs );
 
           displayBaseTile( tempArgs );
+          break;
+        case 'DISPLAYOVERLAYTILE':
+          console.log( "DISPLAYOVERLAYTILE CASE" );
+          var tempArgs = Object.create( args );
+          console.log( "Tempargs: ", tempArgs );
+
+          threeLayersDictPush( tempArgs );
+          console.log( "Tempargs 2 : ", tempArgs );
+          threeLayersDict.forEach( function( entry ) {
+            console.log( entry );
+          } );
+          // console.log( "Args: ", args );
+          console.log( "Tempargs3 : ", tempArgs );
+
+          displayOverlayTile( tempArgs );
+          break;
+        case 'REMOVETILE':
+          console.log( "REMOVE TILE CASE" );
+          // var tempArgs = Object.create( args );
+          removeTile( args );
+          // removeTile( tempArgs );
           break;
         default:
           console.log( "No case detected" );
