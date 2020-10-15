@@ -317,41 +317,34 @@
    * 
    * args = int x, int y
    * 
+   * remove tile will revert it to the original base and overlay tiles as when
+   * the map is first loaded
    * 
+   * i think threelayersdict is an array of dicts
    */
   removeTile = function( args )
   {
-    var x = args[ 0 ];
-    var y = args[ 1 ];
+    var testX = args[ 0 ];
+    var testY = args[ 1 ];
 
-    console.log( x );
-    console.log( y );
+    console.log( testX );
+    console.log( testY );
 
-    // none of this is working
-    // how to get the x and y of each dict entry to then compare
-    threeLayersDict.forEach( function( entry ) {
-      // console.log( entry );
+    console.log( "First element in 3LD: ", threeLayersDict[ 0 ] );
 
-      console.log( "Entry[ 0 ]: ", entry[ 0 ] );
-      console.log( "Entry[ 1 ]: ", entry[ 1 ] );
-      console.log( "Entry: ", entry );
+    // threelayersdict is an array of dicts - have to go through each array element
+    // and make a temp object, check x and y, then move onto next if x and y aren't equal
 
-
-      if( entry[ 0 ] == x && entry[ 1 ] == y )
-      {
-        console.log( "This one: ", entry );
-        // break;
-      }
-    } );
-
-    for( var index = 0; index < threeLayersDict.length; ++index )
+    var result = threeLayersDict.filter( function( element ) 
     {
-      console.log( "A: ", threeLayersDict[ index ][ 0 ] );
-      console.log( "B: ", threeLayersDict[ index ][ 1 ] );
-      if( threeLayersDict[ index ][ 0 ] == x && threeLayersDict[ index ][ 1 ] == y )
-      {
-        console.log( "INdex: ", index );
-      }
+      return element.x == testX && element.y == testY;
+    } );
+  
+    if ( result.length > 0 ) 
+    {
+      // we have found a corresponding element
+      console.log( "Found him boys" );
+      console.log( result[0].y );
     }
   }
 
