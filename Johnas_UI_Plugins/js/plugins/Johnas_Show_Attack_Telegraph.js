@@ -324,13 +324,18 @@
    */
   removeTile = function( args )
   {
+    console.log( "Removing tile" );
+
+
     var testX = args[ 0 ];
     var testY = args[ 1 ];
 
     console.log( testX );
     console.log( testY );
 
-    console.log( "First element in 3LD: ", threeLayersDict[ 0 ] );
+    
+
+    // console.log( "First element in 3LD: ", threeLayersDict[ 0 ] );
 
     // threelayersdict is an array of dicts - have to go through each array element
     // and make a temp object, check x and y, then move onto next if x and y aren't equal
@@ -371,8 +376,26 @@
       if( tempElement.x == testX && tempElement.y == testY )
       {
         console.log( "Same smae" );
+        /**
+         * structure of the object
+        x: x,
+        y: y,
+        desiredBaseTileId: desiredBaseTileId,
+        desiredOverlayTileId: desiredOverlayTileId,
+        idOldTileLayer0: idOldTileLayer0,
+        idOldTileLayer2: idOldTileLayer2,
+        idOldTileLayer3: idOldTileLayer3
+         */
+        var myInterpreter = new Game_Interpreter();
+        myInterpreter.pluginCommand( 'ChangeTile', [ tempElement.x, tempElement.y, 0, tempElement.idOldTileLayer0 ] );
+        myInterpreter.pluginCommand( 'ChangeTile', [ tempElement.x, tempElement.y, 2, tempElement.idOldTileLayer2 ] );
+        myInterpreter.pluginCommand( 'ChangeTile', [ tempElement.x, tempElement.y, 3, tempElement.idOldTileLayer3 ] );
+
+
+        threeLayersDict.splice( index, 1 );
       }
     }
+    console.log( "Done removing tile" );
 
   }
 
