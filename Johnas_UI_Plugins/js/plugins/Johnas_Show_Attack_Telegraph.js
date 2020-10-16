@@ -321,6 +321,10 @@
    * the map is first loaded
    * 
    * i think threelayersdict is an array of dicts
+   * 
+   * BUG IF YOU DISPLAY TILE ON SAME TILE MULTIPLE TIMES, CUS THEN THE MODIFIED
+   * TILE IS SAVED AS THE OG TILE AS WHEN YOU CALL THE DISPLAY AGAIN ON THE SAME TILE
+   * AT THAT TIME THE STILL MODIFIED TILE IS THE "OG" AT THAT TIME
    */
   removeTile = function( args )
   {
@@ -334,40 +338,6 @@
     console.log( testY );
 
     
-
-    // console.log( "First element in 3LD: ", threeLayersDict[ 0 ] );
-
-    // threelayersdict is an array of dicts - have to go through each array element
-    // and make a temp object, check x and y, then move onto next if x and y aren't equal
-
-    /**
-     * This function works for finding if an element exists in the dictionary - but
-     * I can't think of how to access the element where it exists
-     */
-    // var result = threeLayersDict.filter( function( element ) 
-    // {
-    //   // return element.x == testX && element.y == testY;
-    //   if( element.x == testX && element.y == testY ) 
-    //   {
-    //     return element, threeLayersDict.indexOf( element );
-    //   }
-    // } );
-  
-    // if ( result.length > 0 ) 
-    // {
-    //   // we have found a corresponding element
-
-    //   // but idk the index of the elemetn ffffffffffff
-    //   console.log( "Found him boys" );
-    //   console.log( result[0].y );
-    //   console.log( result[0] );
-    // }
-
-
-
-    /**
-     * Works, I think I can fully do remove tile now
-     */
     for( var index = 0; index < threeLayersDict.length; ++index )
     {
       var tempElement = Object.create( threeLayersDict[ index ] );
@@ -395,6 +365,11 @@
         threeLayersDict.splice( index, 1 );
       }
     }
+
+    console.log( "Elements in threeLayersDict: " );
+    threeLayersDict.forEach(function(entry) {
+      console.log(entry);
+    });
     console.log( "Done removing tile" );
 
   }
