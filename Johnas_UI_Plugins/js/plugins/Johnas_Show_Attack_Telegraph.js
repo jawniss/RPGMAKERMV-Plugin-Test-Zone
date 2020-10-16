@@ -335,17 +335,45 @@
     // threelayersdict is an array of dicts - have to go through each array element
     // and make a temp object, check x and y, then move onto next if x and y aren't equal
 
-    var result = threeLayersDict.filter( function( element ) 
-    {
-      return element.x == testX && element.y == testY;
-    } );
+    /**
+     * This function works for finding if an element exists in the dictionary - but
+     * I can't think of how to access the element where it exists
+     */
+    // var result = threeLayersDict.filter( function( element ) 
+    // {
+    //   // return element.x == testX && element.y == testY;
+    //   if( element.x == testX && element.y == testY ) 
+    //   {
+    //     return element, threeLayersDict.indexOf( element );
+    //   }
+    // } );
   
-    if ( result.length > 0 ) 
+    // if ( result.length > 0 ) 
+    // {
+    //   // we have found a corresponding element
+
+    //   // but idk the index of the elemetn ffffffffffff
+    //   console.log( "Found him boys" );
+    //   console.log( result[0].y );
+    //   console.log( result[0] );
+    // }
+
+
+
+    /**
+     * Works, I think I can fully do remove tile now
+     */
+    for( var index = 0; index < threeLayersDict.length; ++index )
     {
-      // we have found a corresponding element
-      console.log( "Found him boys" );
-      console.log( result[0].y );
+      var tempElement = Object.create( threeLayersDict[ index ] );
+      console.log( "tempElement.x: ", tempElement.x );
+      console.log( "tempElement.y: ", tempElement.y );
+      if( tempElement.x == testX && tempElement.y == testY )
+      {
+        console.log( "Same smae" );
+      }
     }
+
   }
 
 
