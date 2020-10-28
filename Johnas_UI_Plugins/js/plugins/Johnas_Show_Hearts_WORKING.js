@@ -29,6 +29,10 @@
 {  
 	var parameters = PluginManager.parameters('Show_Hearts');
 
+
+	$gameScreen.showPicture( 3, "pixel_heart", 1, 150, 20, 5, 5, 500, 2 );
+
+
 	_alias_scene_map_update = Scene_Map.prototype.update;
 	Scene_Map.prototype.update = function( numHearts ) 
 	{
@@ -41,7 +45,7 @@
 			$gameScreen.erasePicture( 2 );
 			$gameScreen.erasePicture( 1 );
 
-			$gameScreen.showPicture( 1, "pixel_heart", 1, 20, 20, 5, 5, 500, 2 );
+			$gameScreen.showPicture( 1, "BOSS_HEARTS", 1, 20, 20, 5, 5, 500, 2 );
 
 			$gameScreen.showPicture( 2, "pixel_heart", 1, 60, 20, 5, 5, 500, 2 );
 
