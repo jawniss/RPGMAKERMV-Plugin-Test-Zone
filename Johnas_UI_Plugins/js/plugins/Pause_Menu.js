@@ -361,6 +361,10 @@ Window_CustomHorzCommand.prototype.windowWidth = function()
 //     if (Input.isTriggered("customMenu")) SceneManager.push(Change_Timer_Length_Menu);
 // };
 
+/**
+ * Secondary menu, timer length change
+ * Will need to add "return to prev menu" command to each of the option commands
+ */
 function Change_Timer_Length_Menu() {
     this.initialize.apply(this, arguments);
 }
@@ -410,26 +414,22 @@ Change_Timer_Length_Menu.prototype.command1 = function () {
     if (this._customCommandWindow.visible) this._customCommandWindow.activate();
     else if (this._customHorzCommandWindow.visible) this._customHorzCommandWindow.activate();
     else this._customSelectableWindow.activate();
-    $gameVariables.setValue(1, $gameVariables.value(1) + 1);
-    console.log( "Game vari 1: ", $gameVariables.value(1) );
+    console.log( "Timer now 8 sec" );
+    this.popScene();
 }
 
 Change_Timer_Length_Menu.prototype.command2 = function () {
     if (this._customCommandWindow.visible) this._customCommandWindow.activate();
     else this._customHorzCommandWindow.activate();
-    $gameVariables.setValue(1, $gameVariables.value(1) - 1);
-    console.log( "Game vari 1: ", $gameVariables.value(1) );
-
+    console.log( "Timer now 4 sec" );
+    this.popScene();
 }
 
 Change_Timer_Length_Menu.prototype.command3 = function () {
     if (this._customCommandWindow.visible) this._customCommandWindow.activate();
     else this._customHorzCommandWindow.activate();
-    var id = $gameVariables.value(1);
-    if (!$gameActors.actor(id)) return;
-    $gameActors.actor(id)._hp -= 50;
-    console.log( "hp: ", $gameActors.actor(id)._hp );
-
+    console.log( "Timer now 2 sec" );
+    this.popScene();
 }
 
 Change_Timer_Length_Menu.prototype.start = function() {
