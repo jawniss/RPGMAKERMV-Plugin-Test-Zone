@@ -100,15 +100,20 @@ Scene_CustomMenu.prototype.command3 = function()
     if( this._customCommandWindow.visible ) this._customCommandWindow.activate();
     else this._customHorzCommandWindow.activate();
     console.log( "Restarting stage" );
-    for( var e of BMM.TRAN.level.events ) {
+    for( var e of BMM.TRAN.level.events ) 
+    {
         e.destroy();
     }
+
+
     if( DataManager.loadGame( 1 ) ) 
     {
         $gamePlayer.reserveTransfer( $gameMap.mapId(), $gamePlayer.x, $gamePlayer.y );
         $gamePlayer.requestMapReload();
         SceneManager.goto( Scene_Map );
     }
+
+    
     BMM.HYB.playerHP = BMM.HYB.playerMaxHP;
 }
 
