@@ -1,9 +1,3 @@
-/**
- * adapted from Poryg the RPG Maker
- * https://www.youtube.com/watch?v=nLCBVBy4dcY&list=PL3Fv4Z54bWaGjcORlYg6TKsnoQDf2no3d&index=4&t=2s
- * Source code in top comment by him
- */
-
 // key P
 Input.keyMapper["80"] = "customMenu";
 
@@ -195,15 +189,15 @@ Window_CustomCommand.prototype.itemRect = function(index) {
         rect.width = 240;
         rect.height = 40;
     }else if (index == 1) {
-        rect.x = 0;
-        rect.y = 50;
+        rect.x = 20;
+        rect.y = 200;
         rect.width = 240;
         rect.height = 40;
     }else if (index == 2) {
         rect.x = 0;
-        rect.y = 100;
-        rect.width = 240;
-        rect.height = 40;
+        rect.y = 400;
+        rect.width = Graphics.boxWidth;
+        rect.height = 80;
     }
     return rect;
 };
