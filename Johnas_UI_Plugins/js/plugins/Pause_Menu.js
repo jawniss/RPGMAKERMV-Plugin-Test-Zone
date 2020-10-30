@@ -323,6 +323,57 @@ Window_CustomHorzCommand.prototype.windowWidth = function()
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * Secondary menu, timer length change
  * Will need to add "return to prev menu" command to each of the option commands
@@ -594,6 +645,21 @@ Window_Custom_TimerHorzCommand.prototype.windowWidth = function()
 {
     return Graphics.boxWidth;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
