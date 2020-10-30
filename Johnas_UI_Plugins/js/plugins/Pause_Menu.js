@@ -1,9 +1,3 @@
-/**
- * adapted from Poryg the RPG Maker
- * https://www.youtube.com/watch?v=nLCBVBy4dcY&list=PL3Fv4Z54bWaGjcORlYg6TKsnoQDf2no3d&index=4&t=2s
- * Source code in top comment by him
- */
-
 // key P
 Input.keyMapper["80"] = "customMenu";
 
@@ -44,6 +38,7 @@ Scene_CustomMenu.prototype.create = function () {
     this._customCommandWindow.setHandler("command1", this.command1.bind(this));
     this._customCommandWindow.setHandler("command2", this.command2.bind(this));
     this._customCommandWindow.setHandler("command3", this.command3.bind(this));
+    this._customCommandWindow.setHandler("command4", this.command4.bind(this));
     this.addWindow(this._customCommandWindow);
     // this._customCommandWindow.deactivate();
 
@@ -51,6 +46,7 @@ Scene_CustomMenu.prototype.create = function () {
     this._customHorzCommandWindow.setHandler("command1", this.command1.bind(this));
     this._customHorzCommandWindow.setHandler("command2", this.command2.bind(this));
     this._customHorzCommandWindow.setHandler("command3", this.command3.bind(this));
+    this._customHorzCommandWindow.setHandler("command4", this.command4.bind(this));
     this.addWindow(this._customHorzCommandWindow);
     // this._customHorzCommandWindow.deactivate();
 
@@ -58,13 +54,18 @@ Scene_CustomMenu.prototype.create = function () {
     // this.addChild(this.customButton);
 }
 
+
+/**
+ * This is each of the different options' commands
+ */
 Scene_CustomMenu.prototype.command1 = function () {
     if (this._customCommandWindow.visible) this._customCommandWindow.activate();
     else if (this._customHorzCommandWindow.visible) this._customHorzCommandWindow.activate();
     else this._customSelectableWindow.activate();
-    $gameVariables.setValue(1, $gameVariables.value(1) + 1);
-    console.log( "Game vari 1: ", $gameVariables.value(1) );
+    console.log( "Returning to game screen" );
+    SceneManager.goto( Scene_Map );
 }
+
 
 Scene_CustomMenu.prototype.command2 = function () {
     if (this._customCommandWindow.visible) this._customCommandWindow.activate();
@@ -73,6 +74,7 @@ Scene_CustomMenu.prototype.command2 = function () {
     console.log( "Game vari 1: ", $gameVariables.value(1) );
 
 }
+
 
 Scene_CustomMenu.prototype.command3 = function () {
     if (this._customCommandWindow.visible) this._customCommandWindow.activate();
@@ -84,12 +86,22 @@ Scene_CustomMenu.prototype.command3 = function () {
 
 }
 
+
+Scene_CustomMenu.prototype.command4 = function () {
+    if (this._customCommandWindow.visible) this._customCommandWindow.activate();
+    else this._customHorzCommandWindow.activate();
+    console.log( "Returning to main menu" );
+    SceneManager.goto( Scene_Title )
+}
+
+
 Scene_CustomMenu.prototype.start = function() {
     Scene_MenuBase.prototype.start.call(this);
     this._customWindow.drawAllItems();
     this._customSelectableWindow.refresh();
     this._customCommandWindow.refresh();
 };
+
 
 Scene_CustomMenu.prototype.update = function () {
     Scene_MenuBase.prototype.update.call(this);
@@ -168,9 +180,10 @@ Window_CustomCommand.prototype.initialize = function (x, y) {
 } 
 
 Window_CustomCommand.prototype.makeCommandList = function() {
-    this.addCommand ("Add 1 to var1", "command1");
-    this.addCommand ("Sub 1 from var1", "command2");
-    this.addCommand ("Sub 50 HP from hero (index = var1)", "command3");
+    this.addCommand ("Return to game", "command1");
+    this.addCommand ("Change timer length", "command2");
+    this.addCommand ("Restart stage", "command3");
+    this.addCommand ("Return to main menu", "command4");
 };
 
 Window_CustomCommand.prototype.drawItem = function (index) {
@@ -204,6 +217,11 @@ Window_CustomCommand.prototype.itemRect = function(index) {
         rect.y = 100;
         rect.width = 240;
         rect.height = 40;
+    }else {
+        rect.x = 0;
+        rect.y = 150;
+        rect.width = 240;
+        rect.height = 40;
     }
     return rect;
 };
@@ -223,9 +241,10 @@ Window_CustomHorzCommand.prototype.initialize = function (x, y) {
 }
 
 Window_CustomHorzCommand.prototype.makeCommandList = function() {
-    this.addCommand ("Add 1 to var1", "command1");
-    this.addCommand ("Sub 1 from var1", "command2");
-    this.addCommand ("Sub 50 HP from hero (index = var1)", "command3", false);
+    this.addCommand ("Return to game", "command1");
+    this.addCommand ("Change timer length", "command2");
+    this.addCommand ("Restart stage", "command3", false);
+    this.addCommand ("Return to main menu", "command4", false);
 };
 
 Window_CustomHorzCommand.prototype.windowWidth = function () {
