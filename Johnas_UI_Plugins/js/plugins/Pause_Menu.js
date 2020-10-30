@@ -148,10 +148,10 @@ Window_Custom.prototype.drawAllItems = function()
 {
     this.contents.clear();
     this.drawText( $gameVariables.value( 2 ), 0, 0, this.width - this.padding * 2, "center" );
-    this.drawIcon( 45, 48, 48 );
-    this.drawFace( "Actor3", 5, 96, 96, 144, 144 );
-    this.drawCharacter( "People1", 0, this.padding, this.padding + 96 );
-    this.drawGauge( 0, 0, 100, 1, "#ff0000", "#00ff00" );
+    // this.drawIcon( 45, 48, 48 );
+    // this.drawFace( "Actor3", 5, 96, 96, 144, 144 );
+    // this.drawCharacter( "People1", 0, this.padding, this.padding + 96 );
+    // this.drawGauge( 0, 0, 100, 1, "#ff0000", "#00ff00" );
 }
 
 
@@ -193,7 +193,7 @@ Window_CustomSelectable.prototype.maxPageItems = function()
 Window_CustomSelectable.prototype.drawItem = function( index ) 
 {
     var itemRect = this.itemRect( index );
-    this.drawFace( "Actor2", 3 + index, itemRect.x, itemRect.y, itemRect.width / 2, itemRect.height / 2 );
+    // this.drawFace( "Actor2", 3 + index, itemRect.x, itemRect.y, itemRect.width / 2, itemRect.height / 2 );
 }
 
 
@@ -231,7 +231,7 @@ Window_CustomCommand.prototype.makeCommandList = function()
 Window_CustomCommand.prototype.drawItem = function( index ) 
 {
     var itemRect = this.itemRect( index );
-    this.drawFace( "Actor2", 3 + index, itemRect.x, itemRect.y, 144, itemRect.height );
+    // this.drawFace( "Actor2", 3 + index, itemRect.x, itemRect.y, 144, itemRect.height );
     Window_Command.prototype.drawItem.call( this, index );
 }
 
@@ -429,10 +429,10 @@ Window_Custom_Timer.prototype.drawAllItems = function()
 {
     this.contents.clear();
     this.drawText( $gameVariables.value( 2 ), 0, 0, this.width - this.padding * 2, "center" );
-    this.drawIcon( 45, 48, 48 );
-    this.drawFace( "Actor3", 5, 96, 96, 144, 144 );
-    this.drawCharacter( "People1", 0, this.padding, this.padding + 96 );
-    this.drawGauge( 0, 0, 100, 1, "#ff0000", "#00ff00" );
+    // this.drawIcon( 45, 48, 48 );
+    // this.drawFace( "Actor3", 5, 96, 96, 144, 144 );
+    // this.drawCharacter( "People1", 0, this.padding, this.padding + 96 );
+    // this.drawGauge( 0, 0, 100, 1, "#ff0000", "#00ff00" );
 }
 
 
@@ -473,7 +473,7 @@ Window_Custom_TimerSelectable.prototype.maxPageItems = function()
 Window_Custom_TimerSelectable.prototype.drawItem = function( index ) 
 {
     var itemRect = this.itemRect( index );
-    this.drawFace( "Actor2", 3 + index, itemRect.x, itemRect.y, itemRect.width / 2, itemRect.height / 2 );
+    // this.drawFace( "Actor2", 3 + index, itemRect.x, itemRect.y, itemRect.width / 2, itemRect.height / 2 );
 }
 
 
@@ -510,7 +510,7 @@ Window_Custom_TimerCommand.prototype.makeCommandList = function()
 Window_Custom_TimerCommand.prototype.drawItem = function( index ) 
 {
     var itemRect = this.itemRect( index );
-    this.drawFace( "Actor2", 3 + index, itemRect.x, itemRect.y, 144, itemRect.height );
+    // this.drawFace( "Actor2", 3 + index, itemRect.x, itemRect.y, 144, itemRect.height );
     Window_Command.prototype.drawItem.call( this, index );
 }
 
@@ -729,10 +729,10 @@ Window_Restart_Yes_No.prototype.drawAllItems = function()
 {
     this.contents.clear();
     this.drawText( $gameVariables.value( 2 ), 0, 0, this.width - this.padding * 2, "center" );
-    this.drawIcon( 45, 48, 48 );
-    this.drawFace( "Actor3", 5, 96, 96, 144, 144 );
-    this.drawCharacter( "People1", 0, this.padding, this.padding + 96 );
-    this.drawGauge( 0, 0, 100, 1, "#ff0000", "#00ff00" );
+    // this.drawIcon( 45, 48, 48 );
+    // this.drawFace( "Actor3", 5, 96, 96, 144, 144 );
+    // this.drawCharacter( "People1", 0, this.padding, this.padding + 96 );
+    // this.drawGauge( 0, 0, 100, 1, "#ff0000", "#00ff00" );
 }
 
 
@@ -773,7 +773,7 @@ Window_Restart_Yes_NoSelectable.prototype.maxPageItems = function()
 Window_Restart_Yes_NoSelectable.prototype.drawItem = function( index ) 
 {
     var itemRect = this.itemRect( index );
-    this.drawFace( "Actor2", 3 + index, itemRect.x, itemRect.y, itemRect.width / 2, itemRect.height / 2 );
+    // this.drawFace( "Actor2", 3 + index, itemRect.x, itemRect.y, itemRect.width / 2, itemRect.height / 2 );
 }
 
 
@@ -808,7 +808,7 @@ Window_Restart_Yes_NoCommand.prototype.makeCommandList = function()
 Window_Restart_Yes_NoCommand.prototype.drawItem = function( index ) 
 {
     var itemRect = this.itemRect( index );
-    this.drawFace( "Actor2", 3 + index, itemRect.x, itemRect.y, 144, itemRect.height );
+    // this.drawFace( "Actor2", 3 + index, itemRect.x, itemRect.y, 144, itemRect.height );
     Window_Command.prototype.drawItem.call( this, index );
 }
 
@@ -830,13 +830,13 @@ Window_Restart_Yes_NoCommand.prototype.itemRect = function( index )
     var rect = {};
     if( index == 0 ) 
     {
-        rect.x = 0;
-        rect.y = 0;
+        rect.x = ( Graphics.boxWidth / 2 ) - ( 140 );
+        rect.y = 150;
         rect.width = 240;
         rect.height = 40;
     } else if( index == 1 ) {
-        rect.x = 20;
-        rect.y = 200;
+        rect.x = ( Graphics.boxWidth / 2 ) - ( 140 );
+        rect.y = 250;
         rect.width = 240;
         rect.height = 40;
     }
