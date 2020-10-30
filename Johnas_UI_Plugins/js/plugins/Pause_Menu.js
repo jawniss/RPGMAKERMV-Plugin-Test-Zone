@@ -516,9 +516,9 @@ Window_Custom_TimerCommand.prototype.initialize = function (x, y) {
 } 
 
 Window_Custom_TimerCommand.prototype.makeCommandList = function() {
-    this.addCommand ("Add 1 to var1", "command1");
-    this.addCommand ("Sub 1 from var1", "command2");
-    this.addCommand ("Sub 50 HP from hero (index = var1)", "command3");
+    this.addCommand ("Timer: 8 seconds", "command1");
+    this.addCommand ("Timer: 4 seconds", "command2");
+    this.addCommand ("Timer: 2 seconds", "command3");
 };
 
 Window_Custom_TimerCommand.prototype.drawItem = function (index) {
@@ -538,20 +538,20 @@ Window_Custom_TimerCommand.prototype.windowHeight = function () {
 Window_Custom_TimerCommand.prototype.itemRect = function(index) {
     var rect = {};
     if (index == 0) {
-        rect.x = 0;
-        rect.y = 0;
+        rect.x = ( Graphics.boxWidth / 2 ) - ( 140 );
+        rect.y = 100;
         rect.width = 240;
         rect.height = 40;
     }else if (index == 1) {
-        rect.x = 20;
+        rect.x = ( Graphics.boxWidth / 2 ) - ( 140 );
         rect.y = 200;
         rect.width = 240;
         rect.height = 40;
     }else if (index == 2) {
-        rect.x = 0;
-        rect.y = 400;
-        rect.width = Graphics.boxWidth;
-        rect.height = 80;
+        rect.x = ( Graphics.boxWidth / 2 ) - ( 140 );
+        rect.y = 300;
+        rect.width = 240;
+        rect.height = 40;
     }
     return rect;
 };
@@ -571,9 +571,9 @@ Window_Custom_TimerHorzCommand.prototype.initialize = function (x, y) {
 }
 
 Window_Custom_TimerHorzCommand.prototype.makeCommandList = function() {
-    this.addCommand ("Add 1 to var1", "command1");
-    this.addCommand ("Sub 1 from var1", "command2");
-    this.addCommand ("Sub 50 HP from hero (index = var1)", "command3", false);
+    this.addCommand ("Timer: 8 seconds", "command1");
+    this.addCommand ("Timer: 4 seconds", "command2");
+    this.addCommand ("Timer: 2 seconds", "command3", false);
 };
 
 Window_Custom_TimerHorzCommand.prototype.windowWidth = function () {
